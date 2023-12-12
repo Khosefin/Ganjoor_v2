@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  direction: rtl;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+::placeholder {
+  font-size: 14px;
+  color: red;
+}
+
+/* scrollBar config */
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: white;
+  margin: 10px 0 10px 0;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #e4e4e4;
+}
+
+/* Font configs */
+
+@font-face {
+  font-family: "danaR";
+  src: url("/DanaFaNum-Regular.ttf");
+}
+@font-face {
+  font-family: "danaM";
+  src: url("/DanaFaNum-Medium.ttf");
+}
+@font-face {
+  font-family: "danaL";
+  src: url("/DanaFaNum-Light.ttf");
+}
+@font-face {
+  font-family: "danaSB";
+  src: url("/DanaFaNum-DemiBold.ttf");
+}
+@font-face {
+  font-family: "morabbaB";
+  src: url("/Morabba-Bold.woff");
+}
+
+@layer base {
+  * {
+    @apply font-danaL;
+  }
+  .bugB {
+    @apply h-10;
+  }
+}
