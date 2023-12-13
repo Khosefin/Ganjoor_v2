@@ -39,13 +39,13 @@ const NavbarButtons = () => (
 );
 
 const SearchBox = () => (
-  <div className="border border-[#d9d9d9] w-3/12 rounded-xl bg-[#fafafa] flex">
+  <div className="border border-[#d9d9d9] h-8 w-3/12 rounded-full bg-[#fafafa] flex items-center">
     <input
       type="text"
-      className="rounded-full w-full bg-[#fafafa] px-2"
+      className="rounded-full w-full bg-[#fafafa] px-2 text-sm"
       placeholder="جستجوی ابیات ..."
     />
-    <Button type="text" className="text-red-900" icon={<SearchOutlined />} />
+    <Button type="text" size="small" shape="circle" className="text-red-900" icon={<SearchOutlined />} />
   </div>
 );
 
