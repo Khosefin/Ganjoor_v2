@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
 import { ConfigProvider } from "antd";
 import theme from "@/ui/configs/Theme";
 import Navbar from "@/ui/components/navbar";
 
+import "@/ui/configs/scrollConfig.css"
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <StyledComponentsRegistry>
         <ConfigProvider theme={theme}>
-          <body className="min-h-[100dvh] bg-[#f5f5f5]">
+          <body className="tw-min-h-[100dvh] tw-bg-[#f5f5f5]">
             <Navbar />
             {children}
           </body>

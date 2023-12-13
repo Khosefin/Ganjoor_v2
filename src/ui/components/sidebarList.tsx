@@ -19,17 +19,17 @@ export default function SidebarList({
   const [isOpen, setIsOpen] = useState<boolean>(defaultValue);
 
   return (
-    <div className="bg-white drop-shadow-sm rounded-lg">
+    <div className="tw-bg-white tw-drop-shadow-sm tw-rounded-lg">
       <div
-        className="flex justify-between items-center border-b-[1px] px-4 py-2 cursor-pointer"
+        className="tw-flex tw-justify-between tw-items-center tw-border-b-[1px] tw-px-4 tw-py-2 tw-cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h1 className="text-lg font-danaR">{header}</h1>
+        <h1 className="tw-text-lg tw-font-danaR">{header}</h1>
         <Button
           type="text"
           size="small"
           shape="circle"
-          className={`text-red-900 ${isOpen && "rotate-180"}`}
+          className={`tw-text-red-900 ${isOpen && "tw-rotate-180"}`}
           icon={<DownOutlined />}
         />
       </div>
@@ -37,21 +37,21 @@ export default function SidebarList({
         in={isOpen}
         transition={{ exit: { duration: 0.2 }, enter: { duration: 0.2 } }}
       >
-        <div className="flex items-center bg-[#fafafa] gap-2 m-3 rounded-lg h-10">
+        <div className="tw-flex tw-items-center tw-bg-[#fafafa] tw-gap-2 tw-m-3 tw-rounded-lg tw-h-10">
           <input
             type="text"
-            className="bg-[#fafafa] w-full h-full rounded-md pr-2"
+            className="tw-bg-[#fafafa] tw-w-full tw-h-full tw-rounded-md tw-pr-2"
             placeholder={`جستجوی ${header} ...`}
           />
-          <div className="mx-3 text-xl text-slate-500"></div>
+          <div className="tw-mx-3 tw-text-xl tw-text-slate-500"></div>
         </div>
         {listItem && (
-          <div className="scrollbar overflow-y-scroll border-t-[1px] p-4 flex flex-col gap-1 max-h-56 rounded-md">
+          <div className="scrollbar tw-overflow-y-scroll tw-border-t-[1px] tw-p-4 tw-flex tw-flex-col tw-gap-1 tw-max-h-56 tw-rounded-md">
             {listItem.map((item) => {
               return (
                 <div
                   key={item}
-                  className="items-center flex gap-2 cursor-pointer"
+                  className="tw-items-center tw-flex tw-gap-2 tw-cursor-pointer"
                 >
                   <input type="checkbox" placeholder={item} />
                   {item}

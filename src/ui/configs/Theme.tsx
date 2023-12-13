@@ -4,7 +4,7 @@ import type { ThemeConfig } from "antd";
 const theme: ThemeConfig = {
   components:{
     Button: {
-      onlyIconSizeSM: 13,
+      onlyIconSizeSM: 14,
     }
   },
   token: {
