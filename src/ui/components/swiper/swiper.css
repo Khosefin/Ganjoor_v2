@@ -1,22 +1,56 @@
-.sliderC {
-    @apply tw-h-52 tw-bg-white tw-text-center tw-items-center tw-flex tw-justify-center;
+.swiper-wrapper {
+  --swiper-pagination-color: #ffffff;
+  --swiper-pagination-left: auto;
+  --swiper-pagination-right: 8px;
+  --swiper-pagination-bottom: 4px;
+  --swiper-pagination-top: auto;
+  --swiper-pagination-fraction-color: none;
+  --swiper-pagination-progressbar-bg-color: none;
+  --swiper-pagination-progressbar-size: 4px;
+  --swiper-pagination-bullet-size: 8px;
+  --swiper-pagination-bullet-width: 8px;
+  --swiper-pagination-bullet-height: 8px;
+  --swiper-pagination-bullet-inactive-color: #000000a2;
+  --swiper-pagination-bullet-inactive-opacity: 0.2;
+  --swiper-pagination-bullet-opacity: 0.4;
+  --swiper-pagination-bullet-horizontal-gap: 5px;
+  --swiper-pagination-bullet-vertical-gap: 6px;
+  border-radius: 1rem /* 16px */ !important;
+  object-fit: cover;
+}
+
+@media not all and (min-width: 640px) {
+  .swiper-wrapper {
+    --swiper-pagination-bullet-inactive-opacity: 0;
+    --swiper-pagination-bullet-opacity: 0;
   }
-  .mySwiper{
-    --swiper-pagination-color: #ffffff;
-    --swiper-pagination-left: auto;
-    --swiper-pagination-right: 8px;
-    --swiper-pagination-bottom: 4px;
-    --swiper-pagination-top: auto;
-    --swiper-pagination-fraction-color: none;
-    --swiper-pagination-progressbar-bg-color: none;
-    --swiper-pagination-progressbar-size: 4px;
-    --swiper-pagination-bullet-size: 8px;
-    --swiper-pagination-bullet-width: 8px;
-    --swiper-pagination-bullet-height: 8px;
-    --swiper-pagination-bullet-inactive-color: #000000a2;
-    --swiper-pagination-bullet-inactive-opacity: 0.2;
-    --swiper-pagination-bullet-opacity: 0.4;
-    --swiper-pagination-bullet-horizontal-gap: 5px;
-    --swiper-pagination-bullet-vertical-gap: 6px;
-    border-radius: 1rem/* 16px */ !important;
+}
+
+@media not all and (min-width: 1024px) {
+  .swiper-wrapper {
+    --swiper-pagination-bullet-size: 5px;
+    --swiper-pagination-bullet-width: 5px;
+    --swiper-pagination-bullet-height: 5px;
   }
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide > img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  max-width: none;
+}
+
+@media (max-width: 640px) {
+  .swiper-slide > img {
+    width: 100%;
+    height: 150px;
+    transform:scale(1.5);
+  }
+}

@@ -1,6 +1,5 @@
 "use client";
 
-import React, { HtmlHTMLAttributes, useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -16,9 +15,10 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 export default function App() {
   return (
-    <>
+    <div className="swiper-container">
       <Swiper
         centeredSlides={true}
+        loop={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
@@ -27,36 +27,36 @@ export default function App() {
           clickable: true,
         }}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
+        className="swiper-wrapper"
       >
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="sliderC">
-          <img src="/a.png" alt="shahname picture" />
+        <SwiperSlide className="swiper-slide">
+          <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }
