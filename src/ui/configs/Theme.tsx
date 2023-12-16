@@ -2,13 +2,14 @@
 import type { ThemeConfig } from "antd";
 
 const theme: ThemeConfig = {
-  components:{
+  components: {
     Button: {
       onlyIconSizeSM: 14,
-    }
+    },
   },
   token: {
     colorPrimary: "#a6331f",
+    colorLink: "#b91c1c",
   },
 };
 
