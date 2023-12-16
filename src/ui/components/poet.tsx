@@ -11,7 +11,7 @@ interface params {
   century: number;
 }
 
-export default function Poet({
+export default function Poets({
   img,
   name,
   birthlocation,
