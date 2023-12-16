@@ -23,14 +23,14 @@ export default function RootLayout({
     <html lang="en">
       <StyledComponentsRegistry>
         <ConfigProvider theme={theme}>
-          <body className="tw-min-h-[100vh] tw-bg-[#f5f5f5] tw-flex tw-flex-col tw-items-center ">
-            <Navbar />
-            <div className="tw-w-[83%] tw-mb-3">
-              <ImageSlider />
-              {/* <Location /> */}
-            </div>
-            {children}
-          </body>
+                <body className="tw-min-h-[100vh] tw-bg-[#f5f5f5] tw-flex tw-flex-col tw-items-center tw-justify-center">
+                  <Navbar />
+                        <div className="tw-w-[91%] max-md:tw-w-[96%] tw-mb-3">
+                          <ImageSlider />
+                          {/* <Location /> */}
+                        </div>
+                  {children}
+                </body>
         </ConfigProvider>
       </StyledComponentsRegistry>
     </html>
