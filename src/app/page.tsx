@@ -26,8 +26,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="tw-flex tw-flex-col tw-w-10/12">
-      <div className="tw-flex max-md:tw-flex-col tw-gap-5 max-sm:tw-gap-3">
+    <div className="tw-flex tw-flex-col tw-w-11/12 max-md:tw-w-[96%]">
+      <div className="tw-flex max-md:tw-flex-col tw-gap-4 max-sm:tw-gap-3">
         <Sidebar />
         <div className="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 xl:tw-grid-cols-5 max-sm:tw-grid-cols-1 tw-gap-4 tw-w-full">
           {Poets.map((item) => (
