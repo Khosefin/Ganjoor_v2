@@ -1,15 +1,15 @@
 table {
-  @apply tw-p-2 tw-my-5 tw-w-full tw-text-center tw-border-[1px] tw-border-red-700 tw-rounded-xl;
-}
-table tr:first-child {
-  @apply tw-border-red-700 tw-border-y-[1px] tw-bg-[#f5f5f5];
+  @apply tw-p-2 tw-my-5 tw-w-full tw-text-center tw-border-[1px] tw-border-slate-300 tw-rounded-xl;
 }
 table tr {
-  @apply tw-border-slate-200 tw-bg-slate-100 tw-border-[1px];
+  @apply tw-border-slate-300 tw-border-y-[1px] tw-bg-[#f5f5f5];
+}
+table tr {
+  @apply tw-border-slate-300 tw-bg-slate-100 tw-border-[1px];
 }
 
 table td {
-  @apply tw-border-red-700 tw-border-l-[1px] tw-px-2;
+  @apply tw-border-slate-300 tw-border-l-[1px] tw-px-2;
 }
 
 .related-images-frame {
@@ -17,7 +17,7 @@ table td {
 }
 
 #stats-section {
-  @apply tw-bg-white tw-rounded-xl tw-p-4 tw-text-justify;
+  @apply tw-bg-white tw-rounded-b-xl tw-border-red-700 tw-p-4 tw-text-justify;
 }
 
 .notice {
@@ -32,5 +32,14 @@ table td {
   @apply tw-text-red-700 tw-font-danaR;
 }
 .century {
-  @apply tw-w-full tw-mb-3 tw-text-center tw-p-1 tw-border-2 tw-rounded-xl tw-border-red-700 tw-text-red-700 tw-bg-white;
+  @apply tw-w-full tw-text-center tw-p-1 tw-bg-white tw-border-t-2 tw-border-red-700 tw-text-xl tw-rounded-t-xl tw-text-red-700;
+}
+
+.part-title-block-alt,
+.part-title-block,
+.main > p {
+  @apply tw-hidden;
+}
+.main {
+  @apply tw-w-full  tw-drop-shadow-lg;
 }
