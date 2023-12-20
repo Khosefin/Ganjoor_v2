@@ -4,7 +4,7 @@ const Loading = () => {
       <img
         src="./loading.png"
         alt="Loading ..."
-        className="tw-h-52 tw-animate-bounce"
+        className="tw-animate-bounce tw-w-[50%]"
       />
     </div>
   );
