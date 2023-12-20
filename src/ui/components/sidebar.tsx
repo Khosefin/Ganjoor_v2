@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import SidebarList from "./sidebarList";
-import { Button, FloatButton, Modal, Slider, Space } from "antd";
+import { Button, FloatButton, Modal, Slider } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import type { SliderMarks } from "antd/es/slider";
+import SidebarList from "./sidebarList";
 
 export default function Sidebar() {
-  const [Poets, setPoets] = useState<string[]>([
+  const [poets] = useState<string[]>([
     "بوستان",
     "گلستان",
     "شاهنامه",
@@ -20,30 +20,13 @@ export default function Sidebar() {
   const [open, setOpen] = useState(false);
 
   const marks: SliderMarks = {
-    3: {
-      style: {
-        fontSize: 12,
-      },
-      label: "قرن 3",
-    },
-    14: {
-      style: {
-        fontSize: 12,
-      },
-      label: "معاصر",
-    },
+    3: { style: { fontSize: 12 }, label: "قرن 3" },
+    14: { style: { fontSize: 12 }, label: "معاصر" },
   };
 
-  const showModal = () => {
-    setOpen(true);
-  };
-  const handleOk = () => {
-    setOpen(false);
-  };
-
-  const handleCancel = () => {
-    setOpen(false);
-  };
+  const showModal = () => setOpen(true);
+  const handleOk = () => setOpen(false);
+  const handleCancel = () => setOpen(false);
 
   return (
     <>
@@ -70,16 +53,10 @@ export default function Sidebar() {
             دسته بندی قرن ها
           </h1>
           <div className="tw-h-10 tw-bg-[#fafafa] tw-px-5">
-            <Slider
-              range
-              marks={marks}
-              min={3}
-              max={14}
-              defaultValue={[5, 12]}
-            />
+            <Slider range marks={marks} min={3} max={14} defaultValue={[5, 12]} />
           </div>
         </div>
-        <SidebarList listItem={Poets} header="کتاب ها" defaultValue={false} />
+        <SidebarList listItem={poets} header="کتاب ها" />
       </div>
       <div className="md:tw-hidden">
         <div className="tw-flex bh">
@@ -129,13 +106,7 @@ export default function Sidebar() {
                 دسته بندی قرن ها
               </h1>
               <div className="tw-h-10 tw-bg-[#f2f2f2] tw-px-5 tw-rounded-full">
-                <Slider
-                  range
-                  marks={marks}
-                  min={3}
-                  max={14}
-                  defaultValue={[5, 12]}
-                />
+                <Slider range marks={marks} min={3} max={14} defaultValue={[5, 12]} />
               </div>
             </div>
             <div className="tw-bg-[#f2f2f2] tw-drop-shadow-sm tw-rounded-lg tw-flex tw-items-center tw-justify-between">
@@ -158,7 +129,11 @@ export default function Sidebar() {
           </div>
         </Modal>
       </div>
-      <FloatButton.BackTop shape="square" type="primary" style={{ left: 15,bottom:20 }} />
+      <FloatButton.BackTop
+        shape="square"
+        type="primary"
+        style={{ left: 15, bottom: 20 }}
+      />
     </>
   );
 }

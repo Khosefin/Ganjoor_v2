@@ -1,7 +1,6 @@
 "use client";
-
 import type { MenuProps } from "antd";
-import { Button, Dropdown, DropdownProps, Space, Tooltip } from "antd";
+import { Button, Dropdown, Space, Tooltip } from "antd";
 import {
   InfoCircleOutlined,
   SearchOutlined,
@@ -12,6 +11,12 @@ import { useState } from "react";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenChange = (nextOpen: boolean, info: { source: string }) => {
+    if (info.source === "trigger" || nextOpen) {
+      setIsModalOpen(nextOpen);
+    }
+  };
 
   const searchMenu: MenuProps["items"] = [
     {
@@ -57,21 +62,13 @@ export default function Navbar() {
     },
   ];
 
-  const handleOpenChange: DropdownProps["onOpenChange"] = (nextOpen, info) => {
-    if (info.source === "trigger" || nextOpen) {
-      setIsModalOpen(nextOpen);
-    }
-  };
-
   return (
     <>
       <div className="tw-z-50 tw-bg-white tw-flex tw-justify-between tw-mb-5 tw-p-4 tw-h-16 tw-shadow-sm tw-top-0 tw-sticky tw-w-full">
         <div className="tw-flex tw-gap-1 tw-items-center max-lg:tw-ml-20">
-          {/* <Logo /> */}
           <div className="tw-border-l-[1px] tw-pl-1">
             <img src="/gdap.png" className="tw-w-8 sm:tw-w-12" alt="Logo" />
           </div>
-          {/* <NavbarTitle /> */}
           <p className="tw-font-morabbaB sm:tw-text-3xl tw-text-xl">
             گنجور{" "}
             <span className="tw-font-danaL sm:tw-text-[12px] tw-text-[9px] tw-pr-1 tw-absolute tw-translate-y-2 ">
@@ -79,7 +76,6 @@ export default function Navbar() {
             </span>
           </p>
         </div>
-        {/* <SearchBox /> */}
         <div className="tw-border tw-border-[#d9d9d9] tw-h-8 tw-w-4/12 tw-rounded-full tw-bg-[#fafafa] tw-flex tw-items-center max-md:tw-hidden">
           <input
             type="text"
@@ -94,7 +90,6 @@ export default function Navbar() {
             icon={<SearchOutlined />}
           />
         </div>
-        {/* <NavbarButtons /> */}
         <div>
           <div className="tw-flex tw-items-center tw-gap-1 max-md:tw-hidden">
             <Tooltip title="info">

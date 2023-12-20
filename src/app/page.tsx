@@ -1,9 +1,8 @@
 "use client";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import Poet from "@/ui/components/poet";
 import Sidebar from "@/ui/components/sidebar";
-import { useQuery } from "@tanstack/react-query";
-import { Skeleton, Spin } from "antd";
-import axios from "axios";
 
 export interface poet {
   id: number;
@@ -19,10 +18,25 @@ const Home = () => {
   const { data, isError, isLoading, isSuccess } = useQuery({
     queryKey: ["Poets"],
     queryFn: async () => {
-      const data = await axios.get("https://api.ganjoor.net/api/ganjoor/poets");
-      return data.data;
+      try {
+        const data = await axios.get(
+          "https://api.ganjoor.net/api/ganjoor/poets"
+        );
+        return data.data;
+      } catch (error) {
+        throw new Error("Error fetching poets");
+      }
     },
   });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error fetching poets</div>;
+  }
+
   return (
     <div className="tw-flex tw-flex-col tw-w-11/12 max-md:tw-w-[96%]">
       <div className="tw-flex max-md:tw-flex-col tw-gap-4 max-sm:tw-gap-3">

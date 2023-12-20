@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import StyledComponentsRegistry from "@/lib/AntdRegistry";
+import { Metadata } from "next";
 import { ConfigProvider } from "antd";
+import StyledComponentsRegistry from "@/lib/AntdRegistry";
 import theme from "@/ui/configs/Theme";
+import TanstackProvider from "@/lib/tanstackprovider";
 import Navbar from "@/ui/components/navbar";
 import ImageSlider from "@/ui/components/swiper/ImageSlider";
 
 import "@/ui/configs/scrollConfig.css";
 import "./globals.css";
-import TanstackProvider from "@/lib/tanstackprovider";
 
 export const metadata: Metadata = {
   title: "گنجور",

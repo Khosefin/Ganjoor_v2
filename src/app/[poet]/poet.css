@@ -36,9 +36,10 @@ table td {
 }
 .part-title-block-alt,
 .part-title-block,
-.main > div > p {
-  @apply tw-hidden tw-bg-white;
+.main > p,
+#findpoet {
+  @apply tw-hidden;
 }
 .main {
-  @apply tw-w-full  tw-drop-shadow-lg;
+  @apply tw-w-full  tw-drop-shadow-lg tw-pointer-events-none;
 }
