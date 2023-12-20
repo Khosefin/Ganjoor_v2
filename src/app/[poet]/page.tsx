@@ -23,12 +23,14 @@ export interface Poet {
     cat: {
       children: [
         {
+          id: number;
           title: string;
           fullUrl: string;
         }
       ];
       poems: [
         {
+          id: number;
           title: string;
           urlSlug: string;
         }
@@ -42,9 +44,9 @@ interface PoetInfo {
   birthYearInLHijri: number;
   deathYearInLHijri: number;
   deathPlace: string;
-  imageUrl: string;
-  name: string;
-  description: string;
+  imageUrl?: string;
+  name?: string;
+  description?: string;
 }
 
 const { Paragraph } = Typography;
@@ -83,7 +85,7 @@ export default function Poet({ params }: { params: { poet: string } }) {
             </Card>
 
             {data.poetOrCat?.cat?.children?.map((child) => (
-              <Link href={child.fullUrl}>
+              <Link key={child.id} href={child.fullUrl}>
                 <Button
                   className="tw-w-full tw-mt-3 tw-bg-red-700 tw-text-base tw-h-9"
                   type="primary"
@@ -93,7 +95,7 @@ export default function Poet({ params }: { params: { poet: string } }) {
               </Link>
             ))}
             {data.poetOrCat?.cat?.poems?.map((child) => (
-              <Link href={`${params.poet}/${child.urlSlug}`}>
+              <Link key={child.id} href={`${params.poet}/${child.urlSlug}`}>
                 <Button
                   className="tw-w-full tw-border-red-700 tw-text-red-700 tw-mt-3 tw-text-base tw-h-9"
                   type="default"
@@ -135,13 +137,13 @@ function getCardActions(poetInfo?: PoetInfo) {
 }
 
 function getLabel(property: keyof PoetInfo) {
-  const labels: Record<keyof PoetInfo, string> = {
+  const labels: Record<string, string> = {
     birthPlace: "تولد",
     birthYearInLHijri: "تاریخ تولد",
     deathPlace: "وفات",
     deathYearInLHijri: "تاریخ وفات",
   };
-  return labels[property] || "دوره";
+  return labels[property];
 }
 
 function getAvatar(poetInfo?: PoetInfo) {

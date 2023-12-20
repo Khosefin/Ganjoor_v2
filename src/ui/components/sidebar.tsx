@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { Button, FloatButton, Modal, Slider } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import type { SliderMarks } from "antd/es/slider";
@@ -25,7 +25,7 @@ export default function Sidebar() {
   };
 
   const showModal = () => setOpen(true);
-  const handleOk = () => setOpen(false);
+  const handleOk: MouseEventHandler<HTMLElement> = () => setOpen(false);
   const handleCancel = () => setOpen(false);
 
   return (
@@ -53,7 +53,13 @@ export default function Sidebar() {
             دسته بندی قرن ها
           </h1>
           <div className="tw-h-10 tw-bg-[#fafafa] tw-px-5">
-            <Slider range marks={marks} min={3} max={14} defaultValue={[5, 12]} />
+            <Slider
+              range
+              marks={marks}
+              min={3}
+              max={14}
+              defaultValue={[5, 12]}
+            />
           </div>
         </div>
         <SidebarList listItem={poets} header="کتاب ها" />
@@ -73,15 +79,7 @@ export default function Sidebar() {
           onCancel={handleCancel}
           cancelText="لفو"
           okText="تایید"
-          footer={[
-            <Button
-              type="primary"
-              onClick={handleOk}
-              className="tw-w-full tw-h-10 tw-text-white tw-border-red-700 tw-shadow-md"
-            >
-              اعمال کردن
-            </Button>,
-          ]}
+          footer={modalbutton(handleOk as never)}
         >
           <div className="tw-flex tw-flex-col tw-gap-5">
             <div className="tw-bg-[#f2f2f2] tw-drop-shadow-sm tw-rounded-lg tw-flex tw-items-center tw-justify-between tw-mt-7">
@@ -106,7 +104,13 @@ export default function Sidebar() {
                 دسته بندی قرن ها
               </h1>
               <div className="tw-h-10 tw-bg-[#f2f2f2] tw-px-5 tw-rounded-full">
-                <Slider range marks={marks} min={3} max={14} defaultValue={[5, 12]} />
+                <Slider
+                  range
+                  marks={marks}
+                  min={3}
+                  max={14}
+                  defaultValue={[5, 12]}
+                />
               </div>
             </div>
             <div className="tw-bg-[#f2f2f2] tw-drop-shadow-sm tw-rounded-lg tw-flex tw-items-center tw-justify-between">
@@ -135,5 +139,17 @@ export default function Sidebar() {
         style={{ left: 15, bottom: 20 }}
       />
     </>
+  );
+}
+
+function modalbutton(handleOk : keyof MouseEventHandler<HTMLElement>) {
+  return (
+    <Button
+      type="primary"
+      onClick={handleOk}
+      className="tw-w-full tw-h-10 tw-text-white tw-border-red-700 tw-shadow-md"
+    >
+      اعمال کردن
+    </Button>
   );
 }
