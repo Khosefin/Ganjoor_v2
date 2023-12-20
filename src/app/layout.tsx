@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ConfigProvider } from "antd";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
 import theme from "@/ui/configs/Theme";
 import TanstackProvider from "@/lib/tanstackprovider";
@@ -21,6 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <SpeedInsights />
       <StyledComponentsRegistry>
         <ConfigProvider theme={theme}>
           <body className="tw-min-h-[100vh] tw-bg-[#f5f5f5] tw-flex tw-flex-col tw-items-center">
