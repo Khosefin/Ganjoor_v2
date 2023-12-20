@@ -41,5 +41,5 @@ table td {
   @apply tw-hidden;
 }
 .main {
-  @apply tw-w-full  tw-drop-shadow-lg tw-pointer-events-none;
+  @apply tw-w-full  tw-drop-shadow-lg;
 }
