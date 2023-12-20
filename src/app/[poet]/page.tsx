@@ -1,11 +1,12 @@
 "use client";
-
 import { Button, Card, Typography } from "antd";
-import Meta from "antd/es/card/Meta";
-import { useState } from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import "./poet.css";
+import Link from "next/link";
+import { chdir } from "process";
+
+const { Paragraph } = Typography;
 
 export interface Poet {
   htmlText: string;
@@ -39,9 +40,17 @@ export interface Poet {
   };
 }
 
+interface PoetInfo {
+  birthPlace: string;
+  birthYearInLHijri: number;
+  deathYearInLHijri: number;
+  deathPlace: string;
+  imageUrl: string;
+  name: string;
+  description: string;
+}
+
 export default function Poet({ params }: { params: { poet: string } }) {
-  const [ellipsis] = useState(true);
-  const { Paragraph } = Typography;
   const { data, isError, isLoading, isSuccess } = useQuery<Poet>({
     queryKey: ["Poets"],
     queryFn: async () => {
@@ -52,86 +61,96 @@ export default function Poet({ params }: { params: { poet: string } }) {
     },
   });
 
-  console.log(data);
+  const poetInfo: PoetInfo | undefined = data?.poetOrCat?.poet;
 
   return (
-    <div className="tw-flex tw-justify-center tw-gap-5 tw-w-11/12">
+    <>
       {isSuccess && (
-        <div className="tw-cursor-pointer tw-drop-shadow-md tw-top-20 tw-sticky tw-rounded-xl tw-w-3/5 tw-h-full">
-          <Card
-            className=" tw-text-justify"
-            actions={[
-              <p className="tw-flex tw-flex-col tw-gap-1 tw-text-[13px] tw-font-danaSB">
-                تولد:
-                <span className="tw-font-danaR tw-text-[13px]">
-                  {data?.poetOrCat.poet.birthPlace}
-                </span>
-              </p>,
-              <p className="tw-flex tw-flex-col tw-gap-1 tw-text-[13px] tw-font-danaSB">
-                تاریخ تولد:
-                <span className="tw-font-danaR tw-text-[13px]">
-                  {data?.poetOrCat.poet.birthYearInLHijri}
-                </span>
-              </p>,
-              <p className="tw-flex tw-flex-col tw-gap-1 tw-text-[13px] tw-font-danaSB">
-                وفات:
-                <span className="tw-font-danaR tw-text-[13px]">
-                  {data?.poetOrCat.poet.deathPlace}
-                </span>
-              </p>,
-              <p className="tw-flex tw-flex-col tw-gap-1 tw-text-[13px] tw-font-danaSB">
-                تاریخ وفات:
-                <span className="tw-font-danaR tw-text-[13px]">
-                  {data?.poetOrCat.poet.deathYearInLHijri}
-                </span>
-              </p>,
-              <p className="tw-flex tw-flex-col tw-gap-1 tw-text-[13px] tw-font-danaSB">
-                دوره:
-                <span className="tw-font-danaR tw-text-[13px]">قرن 10</span>
-              </p>,
-            ]}
-          >
-            <Meta
-              avatar={
-                <img
-                  src={`https://api.ganjoor.net${data?.poetOrCat.poet.imageUrl}`}
-                  width={110}
-                  height={80}
-                  alt="poet picture"
-                />
-              }
-              title={data?.poetOrCat.poet.name}
-              description={
-                <Paragraph
-                  className="tw-text-current tw-font-danaL tw-leading-6"
-                  ellipsis={
-                    ellipsis
-                      ? { rows: 3, expandable: true, symbol: "بیشتر" }
-                      : false
-                  }
+        <div className="tw-flex tw-justify-center tw-gap-5 tw-w-11/12">
+          <div className="tw-cursor-pointer tw-drop-shadow-md tw-top-20 tw-sticky tw-rounded-xl tw-w-3/5 tw-h-full">
+            <Card
+              className="tw-text-justify"
+              actions={getCardActions(poetInfo)}
+            >
+              <Card.Meta
+                avatar={getAvatar(poetInfo)}
+                title={poetInfo?.name}
+                description={getDescription(poetInfo)}
+              />
+            </Card>
+
+            {data.poetOrCat?.cat?.children?.map((child) => (
+              <Link href={child.fullUrl}>
+                <Button
+                  className="tw-w-full tw-border-red-700 tw-text-red-700 tw-mt-3 tw-text-base tw-h-9"
+                  type="default"
                 >
-                  {data?.poetOrCat.poet.description}
-                </Paragraph>
-              }
-            />
-          </Card>
-          <Button
-            className="tw-w-full tw-border-red-700 tw-text-red-700 tw-mt-3 tw-text-base tw-h-9"
-            type="default"
-          >
-            دیوان اشعار
-          </Button>
+                  {child.title}
+                </Button>
+              </Link>
+            ))}
+          </div>
+
+          <div
+            className="main"
+            dangerouslySetInnerHTML={{ __html: data.htmlText }}
+          />
         </div>
       )}
+    </>
+  );
+}
 
-      {isSuccess && (
-        <div className="main">
-          <div dangerouslySetInnerHTML={{ __html: data.htmlText }} />
-        </div>
-      )}
+function getCardActions(poetInfo?: PoetInfo) {
+  if (!poetInfo) return [];
 
-      {isLoading && <p>Loading...</p>}
-      {isError && <p>Error loading data</p>}
-    </div>
+  const commonProperties: (keyof PoetInfo)[] = [
+    "birthPlace",
+    "birthYearInLHijri",
+    "deathPlace",
+    "deathYearInLHijri",
+  ];
+  return commonProperties.map((property) => (
+    <p
+      key={property}
+      className="tw-flex tw-flex-col tw-gap-1 tw-text-[13px] tw-font-danaSB"
+    >
+      {getLabel(property)}:
+      <span className="tw-font-danaR tw-text-[13px]">{poetInfo[property]}</span>
+    </p>
+  ));
+}
+
+function getLabel(property: keyof PoetInfo) {
+  const labels: Record<keyof PoetInfo, string> = {
+    birthPlace: "تولد",
+    birthYearInLHijri: "تاریخ تولد",
+    deathPlace: "وفات",
+    deathYearInLHijri: "تاریخ وفات",
+  };
+  return labels[property] || "دوره";
+}
+
+function getAvatar(poetInfo?: PoetInfo) {
+  return (
+    <img
+      src={
+        poetInfo?.imageUrl ? `https://api.ganjoor.net${poetInfo.imageUrl}` : ""
+      }
+      width={110}
+      height={80}
+      alt="poet picture"
+    />
+  );
+}
+
+function getDescription(poetInfo?: PoetInfo) {
+  return (
+    <Paragraph
+      className="tw-text-current tw-font-danaL tw-leading-6"
+      ellipsis={{ rows: 3, expandable: true, symbol: "بیشتر" }}
+    >
+      {poetInfo?.description}
+    </Paragraph>
   );
 }
