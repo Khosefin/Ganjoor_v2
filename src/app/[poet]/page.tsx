@@ -4,9 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import "./poet.css";
 import Link from "next/link";
-import { chdir } from "process";
-
-const { Paragraph } = Typography;
+import { redirect } from "next/navigation";
+import Loading from "@/ui/components/loading";
 
 export interface Poet {
   htmlText: string;
@@ -24,14 +23,12 @@ export interface Poet {
     cat: {
       children: [
         {
-          id: number;
           title: string;
           fullUrl: string;
         }
       ];
       poems: [
         {
-          id: number;
           title: string;
           urlSlug: string;
         }
@@ -50,6 +47,8 @@ interface PoetInfo {
   description: string;
 }
 
+const { Paragraph } = Typography;
+
 export default function Poet({ params }: { params: { poet: string } }) {
   const { data, isError, isLoading, isSuccess } = useQuery<Poet>({
     queryKey: ["Poet"],
@@ -59,12 +58,16 @@ export default function Poet({ params }: { params: { poet: string } }) {
       );
       return response.data as Poet;
     },
+    retry: 2,
   });
 
   const poetInfo: PoetInfo | undefined = data?.poetOrCat?.poet;
 
+  if (isError) redirect("/");
+
   return (
     <>
+      {isLoading && <Loading />}
       {isSuccess && (
         <div className="tw-flex tw-justify-center tw-gap-5 tw-w-11/12">
           <div className="tw-cursor-pointer tw-drop-shadow-md tw-top-20 tw-sticky tw-rounded-xl tw-w-3/5 tw-h-full">
@@ -81,6 +84,16 @@ export default function Poet({ params }: { params: { poet: string } }) {
 
             {data.poetOrCat?.cat?.children?.map((child) => (
               <Link href={child.fullUrl}>
+                <Button
+                  className="tw-w-full tw-mt-3 tw-bg-red-700 tw-text-base tw-h-9"
+                  type="primary"
+                >
+                  {child.title}
+                </Button>
+              </Link>
+            ))}
+            {data.poetOrCat?.cat?.poems?.map((child) => (
+              <Link href={`${params.poet}/${child.urlSlug}`}>
                 <Button
                   className="tw-w-full tw-border-red-700 tw-text-red-700 tw-mt-3 tw-text-base tw-h-9"
                   type="default"
