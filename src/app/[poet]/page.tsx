@@ -52,7 +52,7 @@ interface PoetInfo {
 
 export default function Poet({ params }: { params: { poet: string } }) {
   const { data, isError, isLoading, isSuccess } = useQuery<Poet>({
-    queryKey: ["Poets"],
+    queryKey: ["Poet"],
     queryFn: async () => {
       const response = await axios.get(
         `https://api.ganjoor.net/api/ganjoor/page?url=%2F${params.poet}&catPoems=true`
