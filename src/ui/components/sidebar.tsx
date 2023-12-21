@@ -53,7 +53,7 @@ export default function Sidebar() {
             دسته بندی قرن ها
           </h1>
           <div className="tw-h-10 tw-bg-[#fafafa] tw-px-5">
-            <Slider marks={marks} min={3} max={14} defaultValue={3} range />
+            <Slider marks={marks} min={3} max={14} defaultValue={3} />
           </div>
         </div>
         <SidebarList listItem={poets} header="کتاب ها" />
