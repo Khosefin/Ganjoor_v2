@@ -45,4 +45,7 @@ input:focus {
   * {
     @apply tw-font-danaL;
   }
+  .childBook:nth-child(odd):last-child {
+    grid-column: span 2;
+  }
 }
