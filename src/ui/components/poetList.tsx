@@ -59,7 +59,7 @@ function getAvatar(imageUrl: string) {
   return (
     <img
       src={`https://api.ganjoor.net${imageUrl}`}
-      className="sm:-tw-translate-x-2 tw-w-14 md:tw-w-20 tw-mb-2"
+      className="sm:-tw-translate-x-2 tw-w-14 md:tw-w-24 tw-mb-2"
       alt="poet picture"
     />
   );
@@ -67,7 +67,7 @@ function getAvatar(imageUrl: string) {
 
 function getTitle(name: string) {
   return (
-    <p className="tw-text-base md:tw-text-lg tw-font-danaL tw-whitespace-pre-wrap tw-text-center">
+    <p className="max-sm:tw-text-xl tw-text-lg tw-font-danaL tw-whitespace-pre-wrap tw-text-center">
       {name}
     </p>
   );

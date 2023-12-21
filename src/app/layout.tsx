@@ -22,10 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <SpeedInsights />
       <StyledComponentsRegistry>
         <ConfigProvider theme={theme}>
           <body className="tw-min-h-[100vh] tw-bg-[#f5f5f5] tw-flex tw-flex-col tw-items-center">
+            <SpeedInsights />
             <TanstackProvider>
               <Navbar />
               <div className="tw-w-[91%] max-md:tw-w-[96%] tw-mb-3">
