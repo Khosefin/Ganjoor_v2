@@ -20,21 +20,15 @@ export default function Search() {
   const searchParams = useSearchParams();
   const term = searchParams.get("term") as string;
 
-  const {
-    data,
-    fetchNextPage,
-    isSuccess,
-    isFetchingNextPage,
-    isLoading,
-    isError,
-  } = useInfiniteQuery({
-    queryKey: ["search", term],
-    queryFn: ({ pageParam = 1 }: { pageParam: number }) =>
-      fetchPosts(pageParam, term),
-    initialPageParam: 1,
-    getNextPageParam: (_, allPages) => allPages.length + 1,
-    retry: 1,
-  });
+  const { data, fetchNextPage, isSuccess, isLoading, isError } =
+    useInfiniteQuery({
+      queryKey: ["search", term],
+      queryFn: ({ pageParam = 1 }: { pageParam: number }) =>
+        fetchPosts(pageParam, term),
+      initialPageParam: 1,
+      getNextPageParam: (_, allPages) => allPages.length + 1,
+      retry: 1,
+    });
 
   const lastPostRef = useRef<HTMLDivElement>(null);
   const { ref, entry } = useIntersection({
@@ -56,24 +50,29 @@ export default function Search() {
   const posts = data?.pages.flatMap((page) => page);
 
   if (isSuccess) {
-    const updatedPosts = posts?.map((obj) => ({
-      ...obj,
-      htmlText: obj.htmlText.replace(
-        new RegExp(term, "u"),
-        `<span class="tw-text-red-700 tw-bg-red-50 tw-font-danaSB founded tw-border-b-2 tw-border-dashed tw-border-red-700">${term}</span>`
-      ),
-    }));
+    const updatedPosts = posts
+      ?.map((obj) => {
+        const updatedHtmlText = obj.htmlText.replace(
+          new RegExp(term, "g"),
+          (match: any) =>
+            `<span class="tw-text-red-700 tw-bg-red-50 tw-font-danaSB founded tw-border-b-2 tw-border-dashed tw-border-red-700">${match}</span>`
+        );
+        return updatedHtmlText.includes(term)
+          ? { ...obj, htmlText: updatedHtmlText }
+          : undefined;
+      })
+      .filter(Boolean);
 
     return (
       <div className="tw-grid tw-w-[78%] max-lg:tw-w-[90%]">
         {updatedPosts?.map((obj: any, index: number) => (
           <div
-            className="tw-flex tw-mb-4 tw-gap-4"
+            className="tw-flex tw-mb-4 tw-gap-4 tw-cursor-pointer"
             onClick={() => router.push(obj.fullUrl)}
             key={index}
             ref={index === updatedPosts.length - 2 ? ref : undefined}
           >
-            <div className="tw-flex tw-flex-col tw-items-center tw-mb-8 tw-border-t-2 tw-h-full tw-border-red-700 tw-rounded-xl tw-w-full tw-bg-white tw-py-10 tw-px-5 tw-justify-evenly">
+            <div className="tw-flex tw-flex-col tw-items-center tw-mb-8 tw-border-t-2 tw-h-full tw-border-red-700 tw-rounded-xl tw-w-full tw-bg-white tw-py-10 tw-px-5 tw-justify-evenly searchDiv">
               <h1 className="tw-font-danaSB tw-text-2xl max-lg:tw-text-xl max-sm:tw-text-base">
                 {obj.fullTitle}
               </h1>

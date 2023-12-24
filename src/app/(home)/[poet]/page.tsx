@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Breadcrumb, notification } from "antd";
 import Loading from "@/ui/components/loading";
 import PoetCard from "@/ui/components/poetCard";
-import "./poet.css";
 import { MenuOutlined } from "@ant-design/icons";
 
 type PoetProps = {
@@ -101,7 +100,7 @@ const Poet: React.FC<PoetProps> = ({ params }) => {
   }
 
   return (
-    <>
+    <Fragment key={JSON.stringify(isLoading)}>
       {contextHolder}
       {isSuccess && (
         <>
@@ -115,11 +114,12 @@ const Poet: React.FC<PoetProps> = ({ params }) => {
             <div
               className="main"
               dangerouslySetInnerHTML={{ __html: data.htmlText }}
+              key={JSON.stringify(isSuccess)}
             />
           </div>
         </>
       )}
-    </>
+    </Fragment>
   );
 };
 

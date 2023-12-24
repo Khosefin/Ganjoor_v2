@@ -40,7 +40,7 @@ export default function PoetCard({
         actions={getCardActions(poetInfo)}
       >
         <Card.Meta
-        className="max-sm:tw-flex max-sm:tw-flex-col max-sm:tw-items-center max-sm:tw-text-center"
+          className="max-sm:tw-flex max-sm:tw-flex-col max-sm:tw-items-center max-sm:tw-text-center"
           avatar={getAvatar(poetInfo)}
           title={poetInfo?.name}
           description={getDescription(poetInfo)}
@@ -87,7 +87,9 @@ function getCardActions(poetInfo?: PoetInfo) {
       className="tw-flex tw-flex-col tw-gap-1 tw-text-[11px] tw-font-danaSB"
     >
       {getLabel(property)}:
-      <span className="tw-font-danaR tw-text-[10px]">{poetInfo[property]}</span>
+      <span className="tw-font-danaR tw-text-[10px]">
+        {poetInfo[property] ? poetInfo[property] : "نامشخص"}
+      </span>
     </p>
   ));
 }

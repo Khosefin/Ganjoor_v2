@@ -32,30 +32,6 @@ export default function App() {
         <SwiperSlide className="swiper-slide">
           <img src="/a.jpg" alt="shahname picture" />
         </SwiperSlide>
-        <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
-        </SwiperSlide>
-        <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
-        </SwiperSlide>
-        <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
-        </SwiperSlide>
-        <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
-        </SwiperSlide>
-        <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
-        </SwiperSlide>
-        <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
-        </SwiperSlide>
-        <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
-        </SwiperSlide>
-        <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
-        </SwiperSlide>
       </Swiper>
     </div>
   );

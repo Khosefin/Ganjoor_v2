@@ -2,7 +2,6 @@
 
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import "./poem.css";
 import PoetCard from "@/ui/components/poetCard";
 import Loading from "@/ui/components/loading";
 import { useRouter } from "next/navigation";
@@ -18,7 +17,7 @@ export default function Poem({
   const router = useRouter();
   const [api, contextHolder] = notification.useNotification();
   const { data, status, isError } = useQuery({
-    queryKey: ["PoemList", params.poem[0], params.poem[1], params.poem[2]],
+    queryKey: ["PoemList", params.poem[0]],
     queryFn: async () => {
       const response = await axios.get(
         `https://api.ganjoor.net/api/ganjoor/page?url=%2F${params.poet}%2F${
