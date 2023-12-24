@@ -8,44 +8,8 @@ import { Breadcrumb, notification } from "antd";
 import Loading from "@/ui/components/loading";
 import PoetCard from "@/ui/components/poetCard";
 import { MenuOutlined } from "@ant-design/icons";
+import { Poet, PoetProps } from "@/lib/types";
 
-type PoetProps = {
-  params: {
-    poet: string;
-  };
-};
-
-export interface Poet {
-  htmlText: string;
-  poetOrCat: {
-    poet: {
-      birthPlace: string;
-      birthYearInLHijri: number;
-      deathYearInLHijri: number;
-      deathPlace: string;
-      fullUrl: string;
-      imageUrl: string;
-      name: string;
-      description: string;
-    };
-    cat: {
-      children: [
-        {
-          id: number;
-          title: string;
-          fullUrl: string;
-        }
-      ];
-      poems: [
-        {
-          id: number;
-          title: string;
-          urlSlug: string;
-        }
-      ];
-    };
-  };
-}
 
 const Poet: React.FC<PoetProps> = ({ params }) => {
   const router = useRouter();

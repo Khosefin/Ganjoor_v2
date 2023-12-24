@@ -76,7 +76,7 @@ function getAvatar(imageUrl: string) {
 
 function getTitle(name: string) {
   return (
-    <p className="max-sm:tw-text-xl tw-text-lg tw-font-danaL tw-whitespace-pre-wrap tw-text-center">
+    <p className="tw-text-base tw-font-danaL tw-text-center">
       {name}
     </p>
   );

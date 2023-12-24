@@ -8,18 +8,7 @@ import PoetList from "@/ui/components/poetList";
 import Sidebar from "@/ui/components/sidebar";
 import Loading from "@/ui/components/loading";
 import { MenuOutlined } from "@ant-design/icons";
-
-export interface poet {
-  id: number;
-  birthPlace: string;
-  birthYearInLHijri: number;
-  deathPlace: string;
-  fullUrl: string;
-  imageUrl: string;
-  name: string;
-  halfCenturyOrder: number;
-  isSticky?: boolean;
-}
+import { poet } from "@/lib/types";
 
 const Home = () => {
   const [api, contextHolder] = notification.useNotification();
