@@ -1,0 +1,99 @@
+table {
+  @apply tw-p-2 tw-my-5 tw-w-full tw-text-center tw-border-[1px] tw-border-slate-300 tw-rounded-xl;
+}
+table tr {
+  @apply tw-border-slate-300 tw-border-y-[1px] tw-bg-[#f5f5f5];
+}
+table tr {
+  @apply tw-border-slate-300 tw-bg-slate-100 tw-border-[1px];
+}
+
+table td {
+  @apply tw-border-slate-300 tw-border-l-[1px] tw-px-2;
+}
+
+.related-images-frame {
+  @apply tw-w-full tw-rounded-t-xl tw-text-sm max-md:tw-text-xs;
+}
+
+a {
+  @apply tw-text-red-700;
+}
+
+.notice {
+  @apply tw-rounded-xl tw-p-4 tw-shadow-inner tw-text-sm tw-bg-[#FAFAFA] tw-border-t-2 tw-border-red-700  tw-mx-3 max-lg:tw-mx-0 tw-mb-3 tw-text-center;
+}
+.notice > p,
+.notice > p > em {
+  @apply tw-font-danaR tw-inline-block tw-leading-6;
+}
+
+h3:has(> #index),
+.part-title-block {
+  @apply tw-rounded-full tw-border-2 tw-border-white tw-shadow-inner tw-w-[80%] tw-mb-4 max-md:tw-mb-2 tw-bg-red-700 tw-text-center tw-font-danaSB tw-text-base max-sm:tw-text-sm tw-items-center tw-m-auto tw-py-[2px];
+}
+
+h3:has(> #index) > a,
+.part-title-block > a {
+  @apply tw-text-white;
+}
+
+#stats-section {
+  @apply  tw-rounded-b-xl tw-border-red-700 tw-p-4 tw-text-justify;
+}
+
+#stats-section > p:first-child {
+  @apply tw-text-center  tw-pb-2 tw-font-danaM;
+}
+
+#stats-section .notice {
+  @apply tw-rounded-xl tw-bg-[#f3f3f3] tw-p-4 tw-text-justify;
+}
+.century {
+  @apply tw-w-full tw-text-center tw-p-1 tw-border-t-2 tw-border-red-700 tw-text-xl tw-rounded-t-xl tw-text-red-700 tw-mt-7;
+}
+
+.related-images-frame a {
+  @apply tw-text-red-700 tw-font-danaR;
+}
+
+.main {
+  @apply tw-w-full tw-h-full tw-py-5 max-lg:tw-py-0 tw-text-center tw-items-center tw-drop-shadow-sm tw-bg-white tw-rounded-xl;
+}
+
+.main > a {
+  @apply tw-text-center tw-items-center tw-justify-center;
+}
+.main > a:first-child {
+  @apply tw-pr-5;
+}
+
+a:has(> .circled-number) {
+  @apply tw-w-7 tw-h-7 tw-inline-flex tw-m-1 tw-bg-white tw-border-[1px] tw-border-red-700 tw-rounded-full tw-text-center tw-items-center tw-justify-center tw-text-sm tw-mb-5;
+}
+
+.poem-excerpt {
+  @apply tw-inline-block max-md:tw-block tw-w-[45%] max-md:tw-w-full tw-pr-8 max-md:tw-px-4 tw-py-4 tw-text-justify max-md:tw-text-xs tw-text-sm tw-border-b-[1px] tw-align-text-bottom tw-mb-2;
+}
+
+#findpoet {
+  @apply tw-hidden;
+}
+
+.clear-both {
+  @apply tw-m-auto tw-items-center tw-text-center;
+}
+
+.main > p:first-child {
+  @apply tw-rounded-xl tw-p-4 tw-shadow-inner tw-bg-[#FAFAFA] tw-border-t-2 tw-border-red-700  tw-m-3 tw-text-center;
+}
+
+.b , .b2{
+  @apply tw-inline-block tw-leading-[40px] tw-w-[45%] max-sm:tw-w-full max-sm:tw-text-center 
+  max-sm:tw-my-2 tw-pr-16 max-md:tw-pr-10 max-sm:tw-pr-0 tw-text-justify tw-text-sm;
+}
+
+.n{
+  @apply tw-text-justify tw-text-base tw-px-6 tw-leading-9 max-md:tw-leading-8 max-sm:tw-leading-7 max-sm:tw-text-sm
+}
+

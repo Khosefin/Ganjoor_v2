@@ -41,7 +41,7 @@ export default function SidebarList({
             <div className="scrollbar tw-overflow-y-scroll tw-border-t-[1px] tw-p-4 tw-flex tw-flex-col tw-gap-1 tw-max-h-56 tw-rounded-md">
               {listItem.map((item, index) => (
                 <div key={index} className="tw-items-center tw-flex tw-gap-2 tw-cursor-pointer">
-                  <label>
+                  <label className="tw-flex tw-gap-3 tw-align-bottom">
                     <input type="checkbox" />
                     {item}
                   </label>

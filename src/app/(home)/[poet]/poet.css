@@ -1,0 +1,53 @@
+table {
+  @apply tw-p-2 tw-my-5 tw-w-full tw-text-center tw-border-[1px] tw-border-slate-300 tw-rounded-xl;
+}
+table tr {
+  @apply tw-border-slate-300 tw-border-y-[1px] tw-bg-[#f5f5f5];
+}
+table tr {
+  @apply tw-border-slate-300 tw-bg-slate-100 tw-border-[1px];
+}
+
+table td {
+  @apply tw-border-slate-300 tw-border-l-[1px] tw-px-2;
+}
+
+.related-images-frame {
+  @apply tw-w-full tw-rounded-t-xl tw-text-sm max-md:tw-text-xs;
+}
+
+#stats-section {
+  @apply tw-rounded-b-xl tw-bg-slate-50 tw-border-red-700 tw-p-4 tw-text-justify;
+}
+
+.notice {
+  @apply tw-rounded-xl tw-bg-[#f3f3f3] tw-p-4;
+}
+
+#stats-section > p:first-child {
+  @apply tw-text-center  tw-pb-2 tw-font-danaM;
+}
+
+.related-images-frame a {
+  @apply tw-text-red-700 tw-font-danaR;
+}
+.century {
+  @apply tw-w-full tw-bg-slate-50 tw-text-center tw-p-1 tw-border-t-2 tw-border-red-700 tw-text-xl tw-rounded-t-xl tw-text-red-700;
+}
+.part-title-block-alt,
+.part-title-block,
+.main > p,
+#findpoet {
+  @apply tw-hidden;
+}
+.main {
+  @apply tw-w-full tw-drop-shadow-lg tw-rounded-t-xl;
+}
+
+.b {
+  @apply tw-inline-block tw-leading-[50px] tw-w-[45%] tw-pr-6 tw-text-justify tw-text-lg;
+}
+
+.n {
+  @apply tw-text-justify tw-text-lg tw-px-6 tw-leading-10;
+}

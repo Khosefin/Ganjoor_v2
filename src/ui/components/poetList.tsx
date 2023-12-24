@@ -1,5 +1,4 @@
-"use client";
-import { poet } from "@/app/page";
+import { poet } from "@/app/(home)/page";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import { useRouter } from "next/navigation";
@@ -9,23 +8,30 @@ export default function PoetList({
   name,
   birthPlace = "نامشخص",
   deathPlace = "نامشخص",
-  birthYearInLHijri,
   fullUrl,
+  birthYearInLHijri,
+  isSticky = false,
 }: poet) {
   const router = useRouter();
 
   return (
-    <Card
-      className="hover:tw-shadow-xl tw-drop-shadow-smtw-cursor-pointer tw-border tw-rounded-xl tw-flex tw-flex-col tw-justify-between "
-      onClick={() => router.push(fullUrl)}
-      actions={getCardActions(birthPlace, deathPlace, birthYearInLHijri)}
+    <div
+      className={`tw-top-20 tw-rounded-xl ${
+        isSticky && "tw-sticky tw-border-t-2 tw-border-red-700"
+      }`}
     >
-      <Meta
-        className="tw-flex md:tw-flex-col tw-items-center max-sm:tw-h-14"
-        avatar={getAvatar(imageUrl)}
-        title={getTitle(name)}
-      />
-    </Card>
+      <Card
+        className="hover:tw-shadow-xl tw-drop-shadow-smtw-cursor-pointer tw-border tw-rounded-xl tw-flex tw-flex-col tw-justify-between"
+        onClick={() => router.push(fullUrl)}
+        actions={getCardActions(birthPlace, deathPlace, birthYearInLHijri)}
+      >
+        <Meta
+          className="tw-flex tw-h-full md:tw-flex-col tw-items-center max-sm:tw-h-14"
+          avatar={getAvatar(imageUrl)}
+          title={getTitle(name)}
+        />
+      </Card>
+    </div>
   );
 }
 
@@ -42,14 +48,17 @@ function getCardActions(
 }
 
 function renderAction(label: string, value: string | number) {
+  const valueToShow =
+    typeof value === "number" ? Math.ceil(value / 100) : value || "نامشخص";
+
   return (
     <p
       key={label}
-      className="tw-flex tw-flex-col tw-gap-1 tw-text-[10px] md:tw-text-[12px]  max-md:tw-text-[13px] tw-font-danaSB tw-h-full"
+      className="tw-flex tw-flex-col tw-gap-1 tw-text-[10px] md:tw-text-[12px] max-md:tw-text-[13px] tw-font-danaSB tw-h-full"
     >
       {label}
       <span className="tw-font-danaR tw-text-[10px] md:tw-text-[12px] max-md:tw-text-[13px]">
-        {value ? value : "نامشخص"}
+        {valueToShow}
       </span>
     </p>
   );
