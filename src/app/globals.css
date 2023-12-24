@@ -156,5 +156,5 @@ a:has(> .circled-number) {
 }
 
 .n {
-  @apply tw-text-justify tw-text-base tw-px-6 tw-leading-9 max-md:tw-leading-8 max-sm:tw-leading-7 max-sm:tw-text-sm;
+  @apply tw-text-justify tw-text-sm tw-px-6 tw-leading-9 max-md:tw-leading-8 max-sm:tw-leading-7 max-sm:tw-text-xs;
 }
