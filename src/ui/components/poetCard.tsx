@@ -1,28 +1,7 @@
-import { Poet } from "@/app/(home)/[poet]/page";
+import { CatChild, CatPoem, Poet } from "@/lib/types";
+import { PoetInfo } from "@/lib/types";
 import { Button, Card, Typography } from "antd";
 import Link from "next/link";
-
-interface PoetInfo {
-  birthPlace: string;
-  birthYearInLHijri: number;
-  deathYearInLHijri: number;
-  deathPlace: string;
-  imageUrl?: string;
-  name?: string;
-  description?: string;
-}
-
-interface CatChild {
-  id: number;
-  title: string;
-  fullUrl: string;
-}
-
-interface CatPoem {
-  id: number;
-  title: string;
-  urlSlug: string;
-}
 
 const { Paragraph } = Typography;
 export default function PoetCard({

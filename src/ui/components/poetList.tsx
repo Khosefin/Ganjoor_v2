@@ -1,4 +1,4 @@
-import { poet } from "@/app/(home)/page";
+import { poet } from "@/lib/types";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import { useRouter } from "next/navigation";

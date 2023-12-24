@@ -1,12 +1,8 @@
 "use client";
 
+import { Params } from "@/lib/types";
 import { Collapse } from "@chakra-ui/transition";
 import { useState } from "react";
-
-interface Params {
-  listItem?: string[];
-  header: string;
-}
 
 export default function SidebarList({
   listItem,

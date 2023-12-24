@@ -46,3 +46,29 @@ export interface Poet {
     };
   };
 }
+export interface Params {
+  listItem?: string[];
+  header: string;
+}
+
+export interface PoetInfo {
+  birthPlace: string;
+  birthYearInLHijri: number;
+  deathYearInLHijri: number;
+  deathPlace: string;
+  imageUrl?: string;
+  name?: string;
+  description?: string;
+}
+
+export interface CatChild {
+  id: number;
+  title: string;
+  fullUrl: string;
+}
+
+export interface CatPoem {
+  id: number;
+  title: string;
+  urlSlug: string;
+}
