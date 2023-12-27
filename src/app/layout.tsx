@@ -1,17 +1,14 @@
-import { Metadata } from "next";
+"use client";
 import { ConfigProvider } from "antd";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
 import theme from "@/ui/configs/Theme";
 import TanstackProvider from "@/lib/tanstackprovider";
+import { Provider } from "react-redux";
+import { store } from "@/redux/slice";
 
 import "@/ui/configs/scrollConfig.css";
 import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "گنجور",
-  description: "گنجور دردانه های زبان پارسی",
-};
 
 export default function RootLayout({
   children,
@@ -20,11 +17,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>گنجور</title>
+        <meta name="description" content="گنجور دردانه های زبان پارسی" />
+        <meta property="og:title" content="گنجور" />
+      </head>
       <body>
         <StyledComponentsRegistry>
           <ConfigProvider theme={theme}>
             <SpeedInsights />
-            <TanstackProvider>{children}</TanstackProvider>
+            <Provider store={store}>
+              <TanstackProvider>{children}</TanstackProvider>
+            </Provider>
           </ConfigProvider>
         </StyledComponentsRegistry>
       </body>

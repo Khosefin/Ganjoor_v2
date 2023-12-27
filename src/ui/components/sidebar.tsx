@@ -12,15 +12,14 @@ export default function Sidebar() {
   const [poets] = useState<string[]>(["متاسفانه هنوزی کتاب تعریف نشده :("]);
   const [open, setOpen] = useState(false);
   const [poetSearch, setPoetSearch] = useState<string>("");
+  const showModal = () => setOpen(true);
+  const handleCancel = () => setOpen(false);
+  const dispatch = useDispatch();
 
   const marks: SliderMarks = {
     3: { style: { fontSize: 12 }, label: "قرن 3" },
     14: { style: { fontSize: 12 }, label: "معاصر" },
   };
-
-  const showModal = () => setOpen(true);
-  const handleCancel = () => setOpen(false);
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -66,7 +65,7 @@ export default function Sidebar() {
         <SidebarList listItem={poets} header="کتاب ها" />
         <Button
           type="primary"
-          className="tw-text-white tw-w-full"
+          className="tw-text-white tw-w-full tw-bg-red-700"
           icon={<UndoOutlined />}
           onClick={() => {
             setPoetSearch("");
