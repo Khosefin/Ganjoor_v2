@@ -72,3 +72,23 @@ export interface CatPoem {
   title: string;
   urlSlug: string;
 }
+
+export interface userInfo {
+  token: string;
+  sessionId: string;
+  user: {
+    id: string;
+    nickName: string;
+    email: string;
+    username: string;
+  };
+}
+export interface sliceState {
+  poetName: string | null;
+  centuryNum: string | null;
+  userInfo: userInfo | null;
+  error: string | null;
+  loading: boolean | null;
+  isRemember: boolean | null;
+  status: "verified" | "rejected" | "error" | null;
+}
