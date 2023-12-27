@@ -10,11 +10,19 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   const dispatch = useDispatch();
-  const isRemember = JSON.parse(localStorage.getItem("isRemember") as any);
-  const userInfo = JSON.parse(localStorage.getItem("userInfo") as any) || "";
+  const isLocalStorageAvailable = typeof window !== 'undefined' && window.localStorage;
+  const isRemember = isLocalStorageAvailable
+    ? JSON.parse(localStorage.getItem("isRemember") as any) || false
+    : false;
+
+  const userInfo = isLocalStorageAvailable
+    ? JSON.parse(localStorage.getItem("userInfo") as any) || ""
+    : "";
+
   if (isRemember && !!Object.keys(userInfo).length) {
     dispatch(setUserInfo(userInfo));
   }
+
   return (
     <>
       <div className="tw-min-h-[100vh] tw-bg-[#f5f5f5] tw-flex tw-flex-col tw-items-center tw-text-center">

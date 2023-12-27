@@ -71,7 +71,7 @@ const poetsSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(getUser.rejected, (state, action) => {
+      .addCase(getUser.rejected, (state, action: any) => {
         state.loading = false;
         state.status = "rejected";
         if (action.payload.code === "ERR_BAD_REQUEST") {

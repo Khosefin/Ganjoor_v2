@@ -7,9 +7,6 @@ import TanstackProvider from "@/lib/tanstackprovider";
 import { Provider } from "react-redux";
 import { store } from "@/redux/slice";
 
-import "@/ui/configs/scrollConfig.css";
-import "./globals.css";
-
 export default function RootLayout({
   children,
 }: {
@@ -17,11 +14,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <title>گنجور</title>
-        <meta name="description" content="گنجور دردانه های زبان پارسی" />
-        <meta property="og:title" content="گنجور" />
-      </head>
       <body>
         <StyledComponentsRegistry>
           <ConfigProvider theme={theme}>

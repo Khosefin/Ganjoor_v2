@@ -22,7 +22,7 @@ export default function LoginPage() {
       clientAppName: "string",
       language: "string",
     };
-    dispatch(getUser(user));
+    dispatch(getUser(user)as any);
   };
 
 
