@@ -6,6 +6,9 @@ import theme from "@/ui/configs/Theme";
 import TanstackProvider from "@/lib/tanstackprovider";
 import { Provider } from "react-redux";
 import { store } from "@/redux/slice";
+import "@/ui/configs/scrollConfig.css";
+import "../globals.css";
+
 
 export default function RootLayout({
   children,
