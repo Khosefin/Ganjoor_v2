@@ -1,14 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  prefix: 'tw-',
+  prefix: "tw-",
   important: true,
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     fontFamily: {
       danaR: ["danaR"],
@@ -17,5 +17,10 @@ module.exports = {
       danaSB: ["danaSB"],
       morabbaB: ["morabbaB"],
     },
+    extend: {
+      backgroundImage: {
+        "main": "url('/public/a.jpg')",
+      },
+    },
   },
-}
+};

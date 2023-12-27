@@ -13,7 +13,8 @@ input:focus {
 }
 
 ::placeholder {
-  font-size: 14px;
+  font-size: 15px;
+  font-family: danaL;
 }
 
 @font-face {
@@ -102,8 +103,8 @@ h3:has(> #index),
   @apply tw-rounded-full tw-border-2 tw-border-white tw-shadow-inner tw-w-[80%] tw-my-3 max-md:tw-my-2 tw-bg-red-700 tw-text-center tw-font-danaSB tw-text-base max-sm:tw-text-sm tw-items-center tw-m-auto tw-py-[2px];
 }
 
-.part-title-block-alt{
-  @apply tw-rounded-full tw-border-2 tw-border-red-700 tw-shadow-inner tw-w-[80%] tw-my-3 max-md:tw-my-2 tw-bg-white tw-text-center tw-font-danaSB tw-text-base max-sm:tw-text-sm tw-items-center tw-m-auto tw-py-[2px]
+.part-title-block-alt {
+  @apply tw-rounded-full tw-border-2 tw-border-red-700 tw-shadow-inner tw-w-[80%] tw-my-3 max-md:tw-my-2 tw-bg-white tw-text-center tw-font-danaSB tw-text-base max-sm:tw-text-sm tw-items-center tw-m-auto tw-py-[2px];
 }
 
 h3:has(> #index) > a,
