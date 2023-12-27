@@ -2,7 +2,7 @@
 import { ConfigProvider } from "antd";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
-import theme from "@/ui/configs/Theme";
+import theme from "@/configs/Theme";
 import TanstackProvider from "@/lib/tanstackprovider";
 import { Provider } from "react-redux";
 import { store } from "@/redux/slice";
