@@ -1,179 +1,204 @@
 "use client";
-
-import { MouseEventHandler, useState } from "react";
-import { Button, FloatButton, Modal, Slider } from "antd";
-import { MenuOutlined, SearchOutlined, UndoOutlined } from "@ant-design/icons";
-import type { SliderMarks } from "antd/es/slider";
-import SidebarList from "./sidebarList";
+import { useState } from "react";
+import { Button } from "./ui/button";
+import { Label } from "./ui/label";
+import { Slider } from "./ui/slider";
+import {
+  MagnifyingGlassIcon,
+  MixerHorizontalIcon,
+  TrashIcon,
+} from "@radix-ui/react-icons";
 import { useDispatch } from "react-redux";
 import { setCenturyFilter, setPoetsFilter } from "@/redux/slice";
+import { Drawer } from "./ui/drawer";
+import {
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerTrigger,
+} from "./ui/drawer";
 
 export default function Sidebar() {
   const [poets] = useState<string[]>(["متاسفانه هنوزی کتاب تعریف نشده :("]);
-  const [open, setOpen] = useState(false);
   const [poetSearch, setPoetSearch] = useState<string>("");
-  const showModal = () => setOpen(true);
-  const handleCancel = () => setOpen(false);
+  const [century, setCentury] = useState<number | null>(null);
   const dispatch = useDispatch();
-
-  const marks: SliderMarks = {
-    3: { style: { fontSize: 12 }, label: "قرن 3" },
-    14: { style: { fontSize: 12 }, label: "معاصر" },
-  };
 
   return (
     <>
       {/* tablet and laptop view */}
-      <div className="tw-z-40 tw-flex tw-flex-col tw-h-full tw-sticky tw-top-[75px] tw-w-64 tw-gap-4 max-md:tw-hidden tw-mb-5">
-        <div className="tw-bg-white tw-drop-shadow-sm tw-rounded-lg">
-          <h1 className="tw-border-b-[1px] tw-px-4 tw-py-2 tw-text-lg tw-font-danaR">
-            جستجو
-          </h1>
-          <div className="tw-flex tw-items-center tw-bg-[] tw-gap-2 tw-m-3 tw-pl-1 tw-rounded-md tw-h-10 tw-bg-[#fafafa]">
+      <div className="z-40 flex flex-col h-full sticky top-[75px] w-72 gap-4 max-md:hidden mb-5 text-start">
+        <div className="border drop-shadow-sm rounded-lg bg-background dark:backdrop-blur dark:supports-[backdrop-filter]:bg-background/30">
+          <h1 className="border-b px-4 py-2 text-lg font-danaR">جستجو</h1>
+          <div className="flex items-center dark:inputBg gap-2 m-3 pl-1 rounded-md h-10 bg-slate-100 ">
             <input
               type="text"
-              className="tw-bg-[#fafafa] tw-w-full tw-h-full tw-rounded-md tw-pr-2"
+              className=" w-full h-full pr-2 divBg rounded-md "
               placeholder="جستجوی سخنور"
               onChange={(e) => {
-                dispatch(setPoetsFilter(e.target.value));
                 setPoetSearch(e.target.value);
               }}
               value={poetSearch}
             />
             <Button
-              type="text"
-              className="tw-text-red-900"
-              icon={<SearchOutlined />}
+              variant="link"
+              size="icon"
               onClick={() => dispatch(setPoetsFilter(poetSearch.trim()))}
-            />
-          </div>
-        </div>
-        <div className="tw-bg-white tw-drop-shadow-sm tw-rounded-lg">
-          <h1 className="tw-border-b-[1px] tw-px-4 tw-py-2 tw-text-lg tw-font-danaR">
-            دسته بندی قرن ها
-          </h1>
-          <div className="tw-h-10 tw-bg-white tw-rounded-b-xl tw-px-5">
-            <Slider
-              marks={marks}
-              min={3}
-              max={14}
-              defaultValue={3}
-              onChange={(e) => dispatch(setCenturyFilter(e))}
-            />
-          </div>
-        </div>
-        <SidebarList listItem={poets} header="کتاب ها" />
-        <Button
-          type="primary"
-          className="tw-text-white tw-w-full tw-bg-red-700"
-          icon={<UndoOutlined />}
-          onClick={() => {
-            setPoetSearch("");
-            dispatch(setCenturyFilter(""));
-            dispatch(setPoetsFilter(null));
-          }}
-        >
-          حذف محدودیت ها
-        </Button>
-      </div>
-      {/*end tablet and laptop view */}
-
-      {/*  mobile view */}
-      <div className="md:tw-hidden">
-        <div className="tw-flex">
-          <Button
-            onClick={showModal}
-            className="tw-w-full tw-h-10 tw-items-center tw-flex tw-justify-between"
-          >
-            <p>محدودسازی</p>
-            <MenuOutlined />
-          </Button>
-        </div>
-        <Modal
-          open={open}
-          onCancel={handleCancel}
-          footer={null}
-          closable={false}
-        >
-          <div className="tw-flex tw-flex-col tw-gap-5 tw-text-center tw-p-5">
-            <div className="tw-drop-shadow-sm tw-rounded-lg tw-shadow-inner tw-bg-[#F8F8F8]">
-              <h1 className="tw-py-1 tw-text-lg tw-font-danaR">سخنور:</h1>
-              <div className=" tw-flex tw-items-center tw-gap-2 tw-m-3 tw-pl-1 tw-rounded-md tw-w-[95%] tw-h-10">
-                <input
-                  type="text"
-                  className="tw-w-full tw-h-full tw-rounded-md tw-pr-2"
-                  placeholder="جستجوی سخنور"
-                  onChange={(e) => {
-                    dispatch(setPoetsFilter(e.target.value));
-                    setPoetSearch(e.target.value);
-                  }}
-                  value={poetSearch}
-                />
-                <Button
-                  type="text"
-                  className="tw-text-red-900"
-                  icon={<SearchOutlined />}
-                  onClick={() => setOpen(false)}
-                />
-              </div>
-            </div>
-            <div className="tw-shadow-inner tw-rounded-lg tw-text-center tw-bg-[#F8F8F8]">
-              <h1 className="tw-px-4 tw-py-2 tw-text-lg tw-font-danaR tw-items-center tw-text-center">
-                دسته بندی قرن ها
-              </h1>
-              <div className="tw-px-5">
-                <Slider
-                  marks={marks}
-                  min={3}
-                  max={14}
-                  defaultValue={3}
-                  onChange={(e) => dispatch(setCenturyFilter(e))}
-                />
-              </div>
-              <Button
-                className="tw-text-red-700 tw-border-[1px] tw-border-red-700 tw-w-[85%] tw-m-auto tw-my-3"
-                icon={<SearchOutlined />}
-              >
-                همه ی قرن ها
-              </Button>
-            </div>
-            <div className="tw-drop-shadow-sm tw-rounded-lg tw-shadow-inner tw-bg-[#F8F8F8]">
-              <h1 className="tw-py-1 tw-text-lg tw-font-danaR">کتاب:</h1>
-              <div className=" tw-flex tw-items-center tw-gap-2 tw-m-3 tw-pl-1 tw-rounded-md tw-w-[95%] tw-h-10">
-                <input
-                  type="text"
-                  className=" tw-w-full tw-h-full tw-rounded-md tw-pr-2"
-                  placeholder="جستجوی کتاب"
-                />
-                <Button
-                  type="text"
-                  className="tw-text-red-900"
-                  icon={<SearchOutlined />}
-                />
-              </div>
-            </div>
-            <Button
-              type="primary"
-              className="tw-text-white tw-w-full"
-              icon={<UndoOutlined />}
-              onClick={() => {
-                setPoetSearch("");
-                dispatch(setCenturyFilter(""));
-                dispatch(setPoetsFilter(null));
-                setOpen(false);
-              }}
             >
-              حذف محدودیت ها
+              <MagnifyingGlassIcon className="h-[1.6rem] w-[1.6rem]" />
             </Button>
           </div>
-        </Modal>
-        {/* tablet and mobile view */}
+        </div>
+        <div className="border drop-shadow-sm rounded-lg bg-background dark:backdrop-blur dark:supports-[backdrop-filter]:bg-background/30">
+          <h1 className="border-b px-4 py-2 text-lg font-danaR">کتاب ها</h1>
+          <div className="flex items-center dark:inputBg gap-2 m-3 pl-1 rounded-md h-10  bg-slate-100">
+            <input
+              type="text"
+              className=" w-full h-full pr-2 rounded-md divBg"
+              placeholder="جستجوی کتاب"
+            />
+            <Button variant="link" size="icon">
+              <MagnifyingGlassIcon className="h-[1.6rem] w-[1.6rem]" />
+            </Button>
+          </div>
+        </div>
+        <div className="border drop-shadow-sm rounded-lg bg-background dark:backdrop-blur dark:supports-[backdrop-filter]:bg-background/30">
+          <div className="flex items-center gap-2 border-b px-4 py-2">
+            <h1 className="text-lg font-danaR">قرن</h1>
+            <p className="opacity-50">
+              {century ? (century === 14 ? "معاصر" : century) : "(همه)"}
+            </p>
+          </div>
+          <div className="flex flex-col gap-2 rounded-b-xl p-4 ">
+            <Slider
+              min={3}
+              max={14}
+              value={century ? [century] : [3]}
+              onValueChange={(e) => setCentury(e[0])}
+            />
+            <div className="flex justify-between text-xs font-yekanThin ">
+              <p>معاصر</p>
+              <p>قرن 3</p>
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-1 w-full">
+          <Button
+            onClick={() => {
+              setPoetSearch("");
+              setCentury(null);
+              dispatch(setCenturyFilter(""));
+              dispatch(setPoetsFilter(null));
+            }}
+            size="icon"
+            variant="link"
+            className="border border-primary p-2"
+          >
+            <TrashIcon className="h-[1.2rem] w-[1.2rem]" />
+          </Button>
+          <Button
+            onClick={() => {
+              setPoetSearch("");
+              dispatch(setCenturyFilter(century));
+              dispatch(setPoetsFilter(poetSearch));
+            }}
+            className="w-full"
+          >
+            اعمال محدودیت
+          </Button>
+        </div>
       </div>
-      <FloatButton.BackTop
-        shape="square"
-        type="primary"
-        style={{ left: 15, bottom: 20 }}
-      />
+      {/*end tablet and laptop view */}
+      <div className="md:hidden ">
+        <Drawer>
+          <DrawerTrigger className="flex w-full items-center px-5 py-2 rounded-lg justify-between bg-background border">
+            <p>محدود سازی</p>
+            <MixerHorizontalIcon className="h-[1.2rem] w-[1.2rem]" />
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="flex flex-col gap-4 m-7">
+              <div className="flex items-center gap-4">
+                <Label
+                  htmlFor="name"
+                  className="text-right whitespace-nowrap w-16"
+                >
+                  سخنوران :
+                </Label>
+                <div className="w-full dark:inputBg rounded-md h-10 bg-slate-100">
+                  <input
+                    type="text"
+                    className=" w-full h-full pr-2 divBg rounded-md "
+                    placeholder="جستجوی سخنور"
+                    onChange={(e) => {
+                      setPoetSearch(e.target.value);
+                    }}
+                    value={poetSearch}
+                  />
+                </div>
+              </div>
+              <div className="flex items-center">
+                <div className="flex items-center gap-4 w-full">
+                  <Label
+                    htmlFor="name"
+                    className="text-right whitespace-nowrap w-[100px]"
+                  >
+                    کتاب ها :
+                  </Label>
+                  <div className="w-full dark:inputBg rounded-md h-10 bg-slate-100">
+                    <input
+                      type="text"
+                      className="w-full h-full pr-2 divBg rounded-md "
+                      placeholder="جستجوی کتاب"
+                    />
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <Label
+                      htmlFor="name"
+                      className="text-right whitespace-nowrap"
+                    >
+                      قرن :
+                    </Label>
+                    <input
+                      type="number"
+                      className="h-10 w-20 pr-2 divBg rounded-md"
+                      placeholder="همه"
+                      min={3}
+                      max={14}
+                      onChange={(e) => setCentury(Number(e.target.value))}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <DrawerFooter>
+              <div className="flex gap-1 w-full">
+                <Button
+                  onClick={() => {
+                    setPoetSearch("");
+                    dispatch(setCenturyFilter(""));
+                    dispatch(setPoetsFilter(null));
+                  }}
+                  size="icon"
+                  variant="link"
+                  className="border border-primary p-2"
+                >
+                  <TrashIcon className="h-[1.2rem] w-[1.2rem]" />
+                </Button>
+                <Button
+                  onClick={() => {
+                    setPoetSearch("");
+                    dispatch(setCenturyFilter(century));
+                    dispatch(setPoetsFilter(poetSearch));
+                  }}
+                  className="w-full"
+                >
+                  اعمال محدودیت
+                </Button>
+              </div>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </div>
     </>
   );
 }

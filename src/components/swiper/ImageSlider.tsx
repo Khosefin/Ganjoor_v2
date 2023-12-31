@@ -30,7 +30,7 @@ export default function App() {
         className="swiper-wrapper"
       >
         <SwiperSlide className="swiper-slide">
-          <img src="/a.jpg" alt="shahname picture" />
+          <img src="/images/ferdosi.png" alt="shahname picture" />
         </SwiperSlide>
       </Swiper>
     </div>

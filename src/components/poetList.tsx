@@ -1,83 +1,57 @@
-import { poet } from "@/lib/types";
-import { Card } from "antd";
-import Meta from "antd/es/card/Meta";
-import { useRouter } from "next/navigation";
+import { poetList } from "@/lib/types";
+import Link from "next/link";
 
 export default function PoetList({
   imageUrl,
   name,
-  birthPlace = "نامشخص",
-  deathPlace = "نامشخص",
+  birthPlace,
+  deathPlace,
   fullUrl,
   birthYearInLHijri,
   isSticky = false,
-}: poet) {
-  const router = useRouter();
-
+}: poetList) {
   return (
-    <div
-      className={`tw-top-20 tw-rounded-xl ${
-        isSticky && "tw-sticky tw-border-t-2 tw-border-red-700"
-      }`}
-    >
-      <Card
-        className="hover:tw-shadow-xl tw-drop-shadow-smtw-cursor-pointer tw-border tw-rounded-xl tw-flex tw-flex-col tw-justify-between"
-        onClick={() => router.push(fullUrl)}
-        actions={getCardActions(birthPlace, deathPlace, birthYearInLHijri)}
-      >
-        <Meta
-          className="tw-flex tw-h-full md:tw-flex-col tw-items-center max-sm:tw-h-14"
-          avatar={getAvatar(imageUrl)}
-          title={getTitle(name)}
-        />
-      </Card>
-    </div>
-  );
-}
-
-function getCardActions(
-  birthPlace: string,
-  deathPlace: string,
-  birthYearInLHijri: number
-) {
-  return [
-    renderAction("تولد:", birthPlace),
-    renderAction("وفات:", deathPlace),
-    renderAction("قرن:", birthYearInLHijri),
-  ];
-}
-
-function renderAction(label: string, value: string | number) {
-  const valueToShow =
-    typeof value === "number" ? Math.ceil(value / 100) : value || "نامشخص";
-
-  return (
-    <p
-      key={label}
-      className="tw-flex tw-flex-col tw-gap-1 tw-text-[10px] md:tw-text-[12px] max-md:tw-text-[13px] tw-font-danaSB tw-h-full"
-    >
-      {label}
-      <span className="tw-font-danaR tw-text-[10px] md:tw-text-[12px] max-md:tw-text-[13px]">
-        {valueToShow}
-      </span>
-    </p>
-  );
-}
-
-function getAvatar(imageUrl: string) {
-  return (
-    <img
-      src={`https://api.ganjoor.net${imageUrl}`}
-      className="sm:-tw-translate-x-2 tw-w-14 md:tw-w-24 tw-mb-2"
-      alt="poet picture"
-    />
-  );
-}
-
-function getTitle(name: string) {
-  return (
-    <p className="tw-text-base tw-font-danaL tw-text-center">
-      {name}
-    </p>
+    <>
+      <Link href={fullUrl}>
+        <div
+          className={` ${
+            isSticky && "sticky top-[75px]"
+          } border drop-shadow-lg rounded-lg bg-background h-full mb-5 relative`}
+        >
+          <div className="flex flex-col gap-3 h-full justify-between">
+            <div className="flex flex-col text-center gap-3 items-center p-3 ">
+              <img
+                src={`https://api.ganjoor.net${imageUrl}`}
+                width={100}
+                height={100}
+                alt={name}
+              />
+              <h1 className="font-yekanBold text-sm w-full h-1">{name}</h1>
+            </div>
+            <div className="flex justify-evenly py-4 border-t">
+              <p className="flex flex-col gap-3 text-xs border-l pl-4 ">
+                تولد
+                <span className="font-yekanLight text-[10px] opacity-80 dark:text-white text-black">
+                  {birthPlace ? birthPlace : "نامشخص"}
+                </span>
+              </p>
+              <p className="flex flex-col gap-3 text-xs border-l pl-4 ">
+                وفات
+                <span className="font-yekanLight text-[10px] opacity-80 dark:text-white text-black">
+                  {deathPlace ? deathPlace : "نامشخص"}
+                </span>
+              </p>
+              <p className="flex flex-col gap-3 text-xs ">
+                قرن
+                <span className="font-yekanLight text-[10px] opacity-80 dark:text-white text-black">
+                  {Math.ceil(birthYearInLHijri / 100)}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="absolute inset-0 rounded-md translate-x-1 -translate-y-1 bg-gradient-to-br from-orange-800 via-orange-400 to-orange-800 -z-10 dark:opacity-80" />
+      </Link>
+    </>
   );
 }

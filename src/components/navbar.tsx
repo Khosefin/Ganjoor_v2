@@ -1,62 +1,32 @@
-import { Button, Dropdown, MenuProps, Tooltip } from "antd";
+"use client";
+import { useTheme } from "next-themes";
+import Logo from "./logo";
 import {
-  InfoCircleOutlined,
-  SearchOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+  MagnifyingGlassIcon,
+  MoonIcon,
+  PersonIcon,
+  SunIcon,
+} from "@radix-ui/react-icons";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import MobileView from "./navbar/mobileView";
-import Logo from "./logo";
-import { useDispatch, useSelector } from "react-redux";
-import { userInfo } from "@/lib/types";
-import { SetLogout } from "@/redux/slice";
-
 export default function Navbar() {
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const { setTheme, theme } = useTheme();
   const [search, setSearch] = useState<string>("");
-  const userInfo: userInfo = useSelector((state: any) => state.poets.userInfo);
+  const router = useRouter();
 
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <Button
-          type="default"
-          className="tw-w-36 tw-h-10 tw-text-red-700 tw-border-red-700 tw-shadow-md"
-          href="/login"
-        >
-          حساب کاربری
-        </Button>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <Button
-          type="default"
-          className="tw-w-36 tw-h-10 tw-text-red-700 tw-border-red-700 tw-shadow-md"
-          href="/login"
-        >
-          نشان شده ها
-        </Button>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <Button
-          type="default"
-          className="tw-w-36 tw-h-10 tw-text-red-700 tw-border-red-700 tw-shadow-md"
-          onClick={() => dispatch(SetLogout(true))}
-        >
-          خروج
-        </Button>
-      ),
-    },
-  ];
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      searchHandler();
+    }
+  };
 
   const searchHandler = () => {
     if (!!search) {
@@ -67,63 +37,88 @@ export default function Navbar() {
     }
   };
 
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      searchHandler();
-    }
-  };
-
   return (
-    <div className="tw-z-50 tw-bg-white tw-flex tw-justify-between tw-mb-5 tw-p-4 tw-h-16 tw-shadow-sm tw-top-0 tw-sticky tw-w-full">
+    <div className="z-50 flex justify-between items-center mb-5 max-md:px-4 px-11 h-16 shadow-sm top-0 sticky w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <Logo />
-      <div className="tw-border tw-border-[#d9d9d9] tw-h-8 tw-w-4/12 tw-rounded-full tw-bg-[#fafafa] tw-flex tw-items-center max-md:tw-hidden">
+      {/* lg view */}
+      <div className="dark:border-0 border border-[#d9d9d9] dark:inputBg h-8 w-4/12 rounded-lg flex items-center max-md:hidden lg:-translate-x-10">
         <input
           type="text"
-          className="tw-rounded-full tw-w-full tw-bg-[#fafafa] tw-px-3 tw-text-sm"
+          className="rounded-lg w-full h-[95%] px-3 text-sm border-0 shadow-none"
           placeholder="جستجوی ابیات ..."
           onChange={(e) => setSearch(e.target.value)}
           value={search}
           onKeyDown={handleEnterPress}
         />
-        <Button
-          type="text"
-          size="small"
-          shape="circle"
-          className="tw-text-red-900 tw-ml-1"
-          icon={<SearchOutlined />}
-          onClick={searchHandler}
-        />
+        <Button variant="link" size="icon" onClick={searchHandler}>
+          <MagnifyingGlassIcon className="h-[1.2rem] w-[1.2rem]" />
+        </Button>
       </div>
+      <div className="flex items-center gap-1 max-md:hidden">
+        <Button
+          size="icon"
+          variant="outline"
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        >
+          <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        </Button>
 
-      {userInfo ? (
-        <Dropdown menu={{ items }} placement="bottomLeft" arrow className="max-md:tw-hidden">
-          <Button size="large" icon={<UserOutlined />}>
-            {userInfo.user.nickName}
-          </Button>
-        </Dropdown>
-      ) : (
-        <div className="tw-flex tw-items-center tw-gap-1 max-md:tw-hidden">
-          <Tooltip title="info">
-            <Button
-              type="text"
-              shape="circle"
-              className="tw-text-red-900"
-              icon={<InfoCircleOutlined />}
-            />
-          </Tooltip>
-          <Button type="text" className="tw-h-10 tw-text-red-700" href="/login">
-            ورود
-          </Button>
-          <Button
-            type="primary"
-            className="tw-bg-red-700 tw-text-white tw-h-10"
-            href="/login"
-          >
-            نام نویسی
-          </Button>
-        </div>
-      )}
-      <MobileView />
+        <Button variant="secondary">ورود</Button>
+        <Button variant="default">نام نویسی</Button>
+      </div>
+      {/* end lg view */}
+      {/* max-md veiw */}
+      <div className="flex gap-2 md:hidden">
+        {/* search dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <MagnifyingGlassIcon className="h-[1.35rem] w-[1.35rem]" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            <div className="w-full h-full flex items-center">
+              <input
+                type="text"
+                className=" w-full h-full px-3 text-sm bg-background"
+                placeholder="جستجوی ابیات ..."
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
+                onKeyDown={handleEnterPress}
+              />
+              <Button variant="link" size="icon" onClick={searchHandler}>
+                <MagnifyingGlassIcon className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {/* user dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button size="icon">
+              <PersonIcon className="h-[1.35rem] w-[1.35rem]" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>
+              <Button className="w-full h-full">ورود</Button>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button className="w-full h-full">نام نویسی</Button>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            >
+              <Button variant="secondary" className="w-full h-full">
+                تغییر تم
+              </Button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      {/* end max-md veiw */}
     </div>
   );
 }

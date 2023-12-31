@@ -1,13 +1,13 @@
 import Image from "next/image";
-import loadingImage from "/public/loading.png";
+import loadingImage from "/public/images/loading.png";
 
 const Loading = () => {
   return (
-    <div className="tw-z-[999] tw-inset-0 tw-flex tw-flex-col tw-fixed tw-items-center tw-text-center tw-bg-[#C03F2C] tw-justify-center">
+    <div className="z-[999] inset-0 flex flex-col fixed items-center text-center justify-center dark:bg-black bg-orange-700">
       <Image
         src={loadingImage}
         alt="Loading ..."
-        className="tw-animate-bounce"
+        className="animate-bounce"
         width={400}
       />
     </div>

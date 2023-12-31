@@ -1,4 +1,4 @@
-export interface poet {
+export interface poetList {
   id: number;
   birthPlace: string;
   birthYearInLHijri: number;
@@ -9,13 +9,14 @@ export interface poet {
   halfCenturyOrder: number;
   isSticky?: boolean;
 }
-export type PoetProps = {
+
+export type poetProps = {
   params: {
     poet: string;
   };
 };
 
-export interface Poet {
+export interface poem {
   htmlText: string;
   poetOrCat: {
     poet: {
@@ -46,12 +47,12 @@ export interface Poet {
     };
   };
 }
-export interface Params {
+export interface params {
   listItem?: string[];
   header: string;
 }
 
-export interface PoetInfo {
+export interface poetInfo {
   birthPlace: string;
   birthYearInLHijri: number;
   deathYearInLHijri: number;
@@ -61,13 +62,13 @@ export interface PoetInfo {
   description?: string;
 }
 
-export interface CatChild {
+export interface catChild {
   id: number;
   title: string;
   fullUrl: string;
 }
 
-export interface CatPoem {
+export interface catPoem {
   id: number;
   title: string;
   urlSlug: string;
@@ -85,10 +86,16 @@ export interface userInfo {
 }
 export interface sliceState {
   poetName: string | null;
-  centuryNum: string | null;
+  centuryNum: number | null;
   userInfo: userInfo | null;
   error: string | null;
   loading: boolean | null;
   isRemember: boolean | null;
   status: "verified" | "rejected" | "error" | null;
+}
+
+export interface location {
+  name :string,
+  icon?: any
+  href: string
 }

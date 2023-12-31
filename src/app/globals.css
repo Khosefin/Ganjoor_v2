@@ -5,6 +5,12 @@
 html,
 body {
   direction: rtl;
+  font-family: yekanRegular;
+}
+
+.background {
+  background-image: url(/images/bk.png);
+  background-repeat: round;
 }
 
 textarea:focus,
@@ -13,149 +19,266 @@ input:focus {
 }
 
 ::placeholder {
-  font-size: 15px;
-  font-family: danaL;
+  font-size: 13px;
+  font-family: yekanLight;
+}
+
+/* List scrollBar config */
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: hsl(var(--background));
+  margin: 10px 0 10px 0;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 3px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: hsl(var(--border));
+}
+
+/* main scrollBar config */
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: hsl(var(--background));
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: hsl(var(--border));
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24.6 95% 53.1%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 24.6 95% 53.1%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 20.5 90.2% 48.2%;
+  }
 }
 
 @font-face {
-  font-family: "danaR";
-  src: url("/DanaFaNum-Regular.ttf");
+  font-family: yekanThin;
+  src: url(/fonts/iranyekanwebthin.woff);
 }
-
 @font-face {
-  font-family: "danaM";
-  src: url("/DanaFaNum-Medium.ttf");
+  font-family: yekanRegular;
+  src: url(/fonts/iranyekanwebregular.woff);
 }
-
 @font-face {
-  font-family: "danaL";
-  src: url("/DanaFaNum-Light.ttf");
+  font-family: yekanMedium;
+  src: url(/fonts/iranyekanwebmedium.woff);
 }
-
 @font-face {
-  font-family: "danaSB";
-  src: url("/DanaFaNum-DemiBold.ttf");
+  font-family: yekanLight;
+  src: url(/fonts/iranyekanweblight.woff);
 }
-
 @font-face {
-  font-family: "morabbaB";
-  src: url("/Morabba-Bold.woff");
+  font-family: yekanXBold;
+  src: url(/fonts/iranyekanwebextrabold.woff);
+}
+@font-face {
+  font-family: yekanXBlack;
+  src: url(/fonts/iranyekanwebextrablack.woff);
+}
+@font-face {
+  font-family: yekanBold;
+  src: url(/fonts/iranyekanwebbold.woff);
+}
+@font-face {
+  font-family: yekanBlack;
+  src: url(/fonts/iranyekanwebblack.woff);
 }
 
 @layer base {
   * {
-    @apply tw-font-danaL;
+    @apply border-border;
   }
-  .childBook:nth-child(odd):last-child {
-    grid-column: span 2;
+  body {
+    @apply text-foreground;
+  }
+  .inputBg {
+    @apply bg-[#3B3B3B];
+  }
+  .divBg {
+    @apply bg-[#F7F7F7] dark:bg-[#3B3B3B];
   }
 }
 
 table {
-  @apply tw-p-2 tw-my-5 tw-w-full tw-text-center tw-border-[1px] tw-border-slate-300 tw-rounded-xl;
+  @apply p-2 my-5 w-full text-center border-[1px] rounded-lg divBg;
 }
 table tr {
-  @apply tw-border-slate-300 tw-border-y-[1px] tw-bg-[#f5f5f5];
+  @apply border-y-[1px] divBg;
 }
 table tr {
-  @apply tw-border-slate-300 tw-bg-slate-100 tw-border-[1px];
+  @apply border-[1px] divBg;
 }
 
 table td {
-  @apply tw-border-slate-300 tw-border-l-[1px] tw-px-2;
+  @apply border-l-[1px] px-2 divBg;
 }
 
 .related-images-frame {
-  @apply tw-w-full tw-rounded-t-xl tw-text-sm max-md:tw-text-xs;
+  @apply w-full rounded-t-xl text-sm max-md:text-xs;
 }
 
 #stats-section {
-  @apply tw-rounded-b-xl tw-bg-slate-50 tw-border-red-700 tw-p-4 tw-text-justify;
+  @apply rounded-b-xl p-4 text-justify;
 }
 
 #stats-section > p:first-child {
-  @apply tw-text-center  tw-pb-2 tw-font-danaM;
+  @apply text-center  pb-2 font-yekanMedium;
 }
 
 .related-images-frame a {
-  @apply tw-text-red-700 tw-font-danaR;
+  @apply font-yekanRegular;
 }
 .century {
-  @apply tw-w-full tw-bg-slate-50 tw-text-center tw-p-1 tw-border-t-2 tw-border-red-700 tw-text-xl tw-rounded-t-xl tw-text-red-700 tw-mt-14;
+  @apply w-full bg-background text-center p-1 border-t-2 border-primary text-xl rounded-t-xl text-primary mt-14;
 }
 
 /* ////////////////////////////////////////////////////// */
 
-a {
-  @apply tw-text-red-700;
+.main a {
+  @apply text-primary;
 }
 
 .notice {
-  @apply tw-rounded-xl tw-p-4 tw-shadow-inner tw-text-sm tw-bg-[#FAFAFA] tw-border-t-2 tw-border-red-700  tw-mx-3 max-lg:tw-mx-0 tw-mb-3 tw-text-center;
+  @apply rounded-xl py-4 px-6 mx-3 shadow-inner text-sm divBg border-t-2 border-primary  max-lg:mx-0 mb-3 text-justify max-sm:text-xs;
 }
 .notice > p,
 .notice > p > em {
-  @apply tw-font-danaR tw-inline-block tw-leading-6;
+  @apply font-yekanRegular text-justify inline-block leading-6;
 }
 
 h3:has(> #index),
 .part-title-block {
-  @apply tw-rounded-full tw-border-2 tw-border-white tw-shadow-inner tw-w-[80%] tw-my-3 max-md:tw-my-2 tw-bg-red-700 tw-text-center tw-font-danaSB tw-text-base max-sm:tw-text-sm tw-items-center tw-m-auto tw-py-[2px];
+  @apply rounded-lg shadow-inner w-[97%] my-3 max-md:my-2 bg-primary text-center font-yekanBold text-base max-sm:text-xs text-background items-center m-auto py-[10px];
 }
 
 .part-title-block-alt {
-  @apply tw-rounded-full tw-border-2 tw-border-red-700 tw-shadow-inner tw-w-[80%] tw-my-3 max-md:tw-my-2 tw-bg-white tw-text-center tw-font-danaSB tw-text-base max-sm:tw-text-sm tw-items-center tw-m-auto tw-py-[2px];
+  @apply rounded-lg border-2 border-primary shadow-inner w-[97%] my-3 max-md:my-2 divBg text-center font-yekanBold text-base max-sm:text-xs items-center m-auto py-[10px];
 }
 
 h3:has(> #index) > a,
 .part-title-block > a {
-  @apply tw-text-white;
+  @apply text-background;
 }
 
 #stats-section .notice {
-  @apply tw-rounded-xl tw-bg-[#f3f3f3] tw-p-4 tw-text-justify;
+  @apply rounded-xl divBg p-4 text-justify;
+}
+
+#stats-section a {
+  @apply pointer-events-none;
 }
 
 .main {
-  @apply tw-w-full tw-h-full tw-py-5 max-lg:tw-py-0 tw-text-center tw-items-center tw-drop-shadow-sm tw-bg-white tw-rounded-xl;
+  @apply w-full h-full py-5 max-lg:py-0 text-center items-center drop-shadow-sm bg-background rounded-xl;
 }
 
 .main > p {
-  @apply tw-text-justify tw-items-center tw-justify-center tw-px-14 tw-leading-8 max-sm:tw-leading-6 max-md:tw-leading-7 tw-text-sm max-md:tw-text-xs;
+  @apply text-justify items-center justify-center px-14 max-md:px-6 leading-8 max-sm:leading-6 max-md:leading-7 text-sm max-md:text-xs;
 }
 .main > a {
-  @apply tw-text-center tw-items-center tw-justify-center;
+  @apply text-center items-center justify-center;
 }
 .main > a:first-child {
-  @apply tw-pr-5;
+  @apply pr-5;
 }
 
 a:has(> .circled-number) {
-  @apply tw-w-7 tw-h-7 tw-inline-flex tw-m-1 tw-bg-white tw-border-[1px] tw-border-red-700 tw-rounded-full tw-text-center tw-items-center tw-justify-center tw-text-sm tw-mb-5;
+  @apply w-9 h-9 inline-flex m-1 divBg border-[1px] border-primary rounded-full text-center items-center justify-center text-sm my-3;
 }
 
 .poem-excerpt {
-  @apply tw-inline-block max-md:tw-block tw-w-[49%] max-md:tw-w-full max-md:tw-px-4 tw-py-4 tw-text-justify max-md:tw-text-xs tw-text-sm tw-border-b-[1px] tw-align-text-bottom tw-mb-2;
+  @apply inline-block max-md:block w-[49%] max-md:w-full max-md:px-4 py-4 text-justify max-md:text-xs text-sm border-b-[1px] align-text-bottom mb-2;
 }
 
 #findpoet {
-  @apply tw-hidden;
+  @apply hidden;
 }
 
 .clear-both {
-  @apply tw-m-auto tw-items-center tw-text-center;
+  @apply m-auto items-center text-center;
 }
 
 .main > p:first-child {
-  @apply tw-rounded-xl tw-p-4 tw-shadow-inner tw-bg-[#FAFAFA] tw-border-t-2 tw-border-red-700  tw-m-3 tw-text-center;
+  @apply rounded-xl p-4 shadow-inner divBg border-t-2 border-primary  m-3 text-center;
 }
 
 .b,
 .b2 {
-  @apply tw-inline-block tw-leading-[40px] tw-w-[45%] max-sm:tw-w-full max-sm:tw-text-center 
-  max-sm:tw-my-2 tw-pr-16 max-md:tw-pr-10 max-sm:tw-pr-0 tw-text-justify tw-text-sm;
+  @apply inline-block leading-[40px] w-[45%] max-sm:w-full max-sm:text-center 
+  max-sm:my-2 pr-16 max-md:pr-10 max-sm:pr-0 text-justify text-sm;
 }
 
 .n {
-  @apply tw-text-justify tw-text-sm tw-px-6 tw-leading-9 max-md:tw-leading-8 max-sm:tw-leading-7 max-sm:tw-text-xs;
+  @apply text-justify text-sm px-6 leading-9 max-md:leading-8 max-sm:leading-7 max-sm:text-xs;
+}
+
+/*//////////////////////////////////////////////*/
+
+.searchDiv > div > .b:not(:has(> div > p > .founded)) {
+  @apply hidden;
+}
+.searchDiv > div > .n:not(:has(> p > .founded)) {
+  @apply hidden;
+}
+
+.searchDiv > div > .b {
+  @apply flex max-sm:flex-col w-full gap-14 max-sm:gap-3 text-base max-lg:text-sm items-center text-center justify-center;
+}
+.searchDiv > div > .b > div > p {
+  @apply w-full;
+}
+
+.searchDiv > div > .n {
+  @apply text-justify text-sm max-lg:text-xs px-6 max-lg:px-0 lg:leading-8 max-lg:leading-7 max-sm:leading-6;
 }

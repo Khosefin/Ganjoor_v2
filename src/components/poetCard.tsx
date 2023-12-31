@@ -1,79 +1,124 @@
-import { CatChild, CatPoem, Poet } from "@/lib/types";
-import { PoetInfo } from "@/lib/types";
-import { Button, Card, Typography } from "antd";
+import { catChild, catPoem, poem, poetInfo } from "@/lib/types";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
+import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 
-const { Paragraph } = Typography;
 export default function PoetCard({
   data,
-  params,
 }: {
-  data: Poet;
-  params: string | string[] | undefined;
+  data: poem;
+  params: string | undefined;
 }) {
-  const poetInfo: PoetInfo | undefined = data?.poetOrCat?.poet;
+  const poetInfo: poetInfo | undefined = data?.poetOrCat?.poet;
   return (
     <>
-      <Card
-        className="tw-text-justify tw-mb-2"
-        actions={getCardActions(poetInfo)}
-      >
-        <Card.Meta
-          className="max-sm:tw-flex max-sm:tw-flex-col max-sm:tw-items-center max-sm:tw-text-center"
-          avatar={getAvatar(poetInfo)}
-          title={poetInfo?.name}
-          description={getDescription(poetInfo)}
-        />
-      </Card>
-      <div className="tw-grid-cols-2 tw-gap-2 tw-grid">
-        {data.poetOrCat?.cat?.children?.map((child: CatChild) => (
-          <Link key={child.id} href={child.fullUrl} className="childBook">
+      <div className="max-md:hidden">
+        <div className="flex flex-col bg-background items-center text-center gap-5 p-5 w-full rounded-lg">
+          <img
+            src={
+              poetInfo?.imageUrl
+                ? `https://api.ganjoor.net${poetInfo.imageUrl}`
+                : ""
+            }
+            width={120}
+            height={120}
+            alt={poetInfo?.name}
+          />
+
+          <h1>{poetInfo?.name}</h1>
+          <h4 className="text-justify text-xs leading-6 opacity-70">
+            {poetInfo?.description}
+          </h4>
+
+          <div className="flex justify-between py-4 border-t w-full">
+            {getCardInfos(poetInfo)}
+          </div>
+        </div>
+        <div className="columns-auto gap-2">
+          {data.poetOrCat?.cat?.children?.map((child: catChild) => (
+            <Link key={child.id} href={child.fullUrl} className="childBook">
+              <Button className="w-full h-full text-sm whitespace-pre-line my-2">
+                {child.title}
+              </Button>
+            </Link>
+          ))}
+        </div>
+        {data.poetOrCat?.cat?.poems?.map((child: catPoem) => (
+          <Link key={child.id} href={child.urlSlug}>
             <Button
-              className="tw-w-full tw-h-full tw-bg-red-700 tw-text-sm tw-whitespace-pre-line"
-              type="primary"
+              className="w-full h-full border border-primary my-2 text-sm whitespace-pre-line"
+              variant="link"
             >
               {child.title}
             </Button>
           </Link>
         ))}
       </div>
-      {data.poetOrCat?.cat?.poems?.map((child: CatPoem) => (
-        <Link key={child.id} href={child.urlSlug}>
-          <Button
-            className="tw-w-full tw-h-full tw-border-red-700 tw-text-red-700 tw-mt-3 tw-text-sm tw-whitespace-pre-line"
-            type="default"
-          >
-            {child.title}
-          </Button>
-        </Link>
-      ))}
+      <div className="md:hidden ">
+        <Drawer>
+          <DrawerTrigger className="flex w-full items-center px-5 py-2 rounded-lg justify-between bg-background border">
+            <p>مشاهده اطلاعات شاعر</p>
+            <QuestionMarkCircledIcon className="h-[1.2rem] w-[1.2rem]" />
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="flex flex-col bg-background items-center text-center gap-5 p-5 w-full rounded-lg h-[400px] overflow-y-scroll">
+              <img
+                src={
+                  poetInfo?.imageUrl
+                    ? `https://api.ganjoor.net${poetInfo.imageUrl}`
+                    : ""
+                }
+                width={120}
+                height={120}
+                alt={poetInfo?.name}
+              />
+
+              <h1>{poetInfo?.name}</h1>
+              <h4 className="text-justify text-xs leading-6 opacity-70">
+                {poetInfo?.description}
+              </h4>
+
+              <div className="flex justify-between py-4 border-t w-full">
+                {getCardInfos(poetInfo)}
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
     </>
   );
 }
 
-function getCardActions(poetInfo?: PoetInfo) {
+function getCardInfos(poetInfo?: poetInfo) {
   if (!poetInfo) return [];
 
-  const commonProperties: (keyof PoetInfo)[] = [
+  const commonProperties: (keyof poetInfo)[] = [
     "birthPlace",
     "birthYearInLHijri",
     "deathPlace",
     "deathYearInLHijri",
   ];
   return commonProperties.map((property) => (
-    <p
-      key={property}
-      className="tw-flex tw-flex-col tw-gap-1 tw-text-[11px] tw-font-danaSB"
+    <div
+      className={`flex flex-col items-center text-center w-[25%] ${
+        property === "deathYearInLHijri" ? "" : "border-l"
+      } `}
     >
-      {getLabel(property)}:
-      <span className="tw-font-danaR tw-text-[10px]">
-        {poetInfo[property] ? poetInfo[property] : "نامشخص"}
-      </span>
-    </p>
+      <p
+        key={property}
+        className="flex flex-col gap-1 w-full text-[10px] opacity-70 mx-3"
+      >
+        {getLabel(property)}:
+        <span className="font-yekanLight text-[10px]">
+          {poetInfo[property] ? poetInfo[property] : "نامشخص"}
+        </span>
+      </p>
+    </div>
   ));
 }
 
-function getLabel(property: keyof PoetInfo) {
+function getLabel(property: keyof poetInfo) {
   const labels: Record<string, string> = {
     birthPlace: "تولد",
     birthYearInLHijri: "تاریخ تولد",
@@ -81,27 +126,4 @@ function getLabel(property: keyof PoetInfo) {
     deathYearInLHijri: "تاریخ وفات",
   };
   return labels[property];
-}
-
-function getAvatar(poetInfo?: PoetInfo) {
-  return (
-    <img
-      src={
-        poetInfo?.imageUrl ? `https://api.ganjoor.net${poetInfo.imageUrl}` : ""
-      }
-      className="max-md:tw-w-20 md:tw-w-22 max-sm:-tw-translate-x-2 max-sm:-tw-translate-y-2"
-      alt="poet picture"
-    />
-  );
-}
-
-function getDescription(poetInfo?: PoetInfo) {
-  return (
-    <Paragraph
-      className="tw-text-current tw-text-[12px] tw-font-danaL tw-leading-5"
-      ellipsis={{ rows: 3, expandable: true, symbol: "بیشتر" }}
-    >
-      {poetInfo?.description}
-    </Paragraph>
-  );
 }

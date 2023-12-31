@@ -1,23 +1,19 @@
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Logo() {
-  const router = useRouter();
   return (
-    <div className="tw-flex tw-gap-1 tw-items-center max-lg:tw-ml-20">
-      <div className="tw-border-l-[1px] tw-pl-1">
-        <img
-          src="/gdap.png"
-          className="tw-w-8 sm:tw-w-12"
-          alt="Logo"
-          onClick={() => router.push("/")}
-        />
+    <Link href="/home">
+      <div className="flex gap-2 items-center justify-center max-lg:ml-20">
+        <div className="sm:border-l sm:pl-2">
+          <img src="/images/gdap.png" className="w-10" alt="Logo" />
+        </div>
+        <p className="font-yekanXBold sm:text-3xl text-2xl">
+          گنجور
+          <span className="font-yekanLight text-[9px] pr-1 absolute translate-y-2 ">
+            دردانه های ادب پارسی
+          </span>
+        </p>
       </div>
-      <p className="tw-font-morabbaB sm:tw-text-3xl tw-text-xl">
-        گنجور
-        <span className="tw-font-danaL sm:tw-text-[12px] tw-text-[9px] tw-pr-1 tw-absolute tw-translate-y-2 ">
-          دردانه های ادب پارسی
-        </span>
-      </p>
-    </div>
+    </Link>
   );
 }

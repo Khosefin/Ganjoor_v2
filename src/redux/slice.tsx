@@ -38,7 +38,7 @@ const poetsSlice = createSlice({
       state.poetName = action.payload as string;
     },
     setCenturyFilter: (state, action) => {
-      state.centuryNum = action.payload as string;
+      state.centuryNum = action.payload as number;
     },
     setloading: (state, action) => {
       state.loading = action.payload as boolean;
@@ -59,11 +59,10 @@ const poetsSlice = createSlice({
     builder
       .addCase(getUser.pending, (state) => {
         state.loading = true;
-        state.error = null
+        state.error = null;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.userInfo = action.payload;
-        localStorage.setItem("isRemember", JSON.stringify(state.isRemember));
         if (state.isRemember) {
           localStorage.setItem("userInfo", JSON.stringify(action.payload));
         }
