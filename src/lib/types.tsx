@@ -92,6 +92,7 @@ export interface sliceState {
   loading: boolean | null;
   isRemember: boolean | null;
   status: "verified" | "rejected" | "error" | null;
+  captcha: string | null;
 }
 
 export interface location {

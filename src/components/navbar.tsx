@@ -16,6 +16,7 @@ import {
 } from "./ui/dropdown-menu";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Navbar() {
   const { setTheme, theme } = useTheme();
@@ -63,9 +64,10 @@ export default function Navbar() {
           <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
         </Button>
-
-        <Button variant="secondary">ورود</Button>
-        <Button variant="default">نام نویسی</Button>
+        <Link href="/login">
+          <Button variant="secondary">ورود</Button>
+          <Button variant="default">نام نویسی</Button>
+        </Link>
       </div>
       {/* end lg view */}
       {/* max-md veiw */}
@@ -103,10 +105,14 @@ export default function Navbar() {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>
-              <Button className="w-full h-full">ورود</Button>
+              <Link href="/login">
+                <Button className="w-full h-full">ورود</Button>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Button className="w-full h-full">نام نویسی</Button>
+              <Link href="/login">
+                <Button className="w-full h-full">نام نویسی</Button>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}

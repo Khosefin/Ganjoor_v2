@@ -13,6 +13,11 @@ body {
   background-repeat: round;
 }
 
+.loginBg{
+  background-image: url(/images/ferdosi.png);
+  background-size: cover;
+}
+
 textarea:focus,
 input:focus {
   outline: none;
@@ -256,7 +261,10 @@ a:has(> .circled-number) {
 .b,
 .b2 {
   @apply inline-block leading-[40px] w-[45%] max-sm:w-full max-sm:text-center 
-  max-sm:my-2 pr-16 max-md:pr-10 max-sm:pr-0 text-justify text-sm;
+  max-sm:my-2 pr-16 max-md:pr-10 max-sm:pr-0 text-justify text-sm relative;
+}
+.b > .b {
+  @apply hidden;
 }
 
 .n {

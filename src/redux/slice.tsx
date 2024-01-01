@@ -4,20 +4,15 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import { sliceState, userInfo } from "@/lib/types";
+import { sliceState } from "@/lib/types";
 
-export const getUser = createAsyncThunk(
-  "User/login",
-  async (postData: object, { rejectWithValue }) => {
+export const getCaptcha = createAsyncThunk(
+  "User/captcha",
+  async () => {
     try {
-      const response = await axios.post(
-        "https://api.ganjoor.net/api/users/login",
-        postData
-      );
-      console.log("Login successful");
-      return response.data as userInfo;
+      const response = await axios.get("https://api.ganjoor.net/api/users/captchaimage");
+          return response.data; 
     } catch (error) {
-      throw rejectWithValue(error);
     }
   }
 );
@@ -30,8 +25,8 @@ const poetsSlice = createSlice({
     userInfo: null,
     error: null,
     loading: false,
-    isRemember: true,
     status: null,
+    captcha: null,
   } as sliceState,
   reducers: {
     setPoetsFilter: (state, action) => {
@@ -43,8 +38,8 @@ const poetsSlice = createSlice({
     setloading: (state, action) => {
       state.loading = action.payload as boolean;
     },
-    setRemember: (state, action) => {
-      state.isRemember = action.payload as boolean;
+    setCaptcha: (state, action) => {
+      state.captcha = action.payload as string;
     },
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
@@ -57,25 +52,19 @@ const poetsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getUser.pending, (state) => {
+      .addCase(getCaptcha.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getUser.fulfilled, (state, action) => {
-        state.userInfo = action.payload;
-        if (state.isRemember) {
-          localStorage.setItem("userInfo", JSON.stringify(action.payload));
-        }
+      .addCase(getCaptcha.fulfilled, (state, action) => {
+        state.captcha = action.payload;
         state.status = "verified";
         state.loading = false;
         state.error = null;
       })
-      .addCase(getUser.rejected, (state, action: any) => {
+      .addCase(getCaptcha.rejected, (state, action: any) => {
         state.loading = false;
         state.status = "rejected";
-        if (action.payload.code === "ERR_BAD_REQUEST") {
-          state.error = "اطلاعات وارد شده صحیح نمیباشد..!";
-        }
         if (action.payload.code === "ERR_NETWORK") {
           state.error =
             "مشکل دربرقراری ارتباط، لطفا از وصل بودن اینترنت اطمینان حاصل نمایید";
@@ -88,7 +77,7 @@ export const {
   setPoetsFilter,
   setCenturyFilter,
   setloading,
-  setRemember,
+  setCaptcha,
   setUserInfo,
   SetLogout,
 } = poetsSlice.actions;

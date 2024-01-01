@@ -4,12 +4,7 @@ import { Button } from "./ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 
-export default function PoetCard({
-  data,
-}: {
-  data: poem;
-  params: string | undefined;
-}) {
+export default function PoetCard({ data }: { data: poem }) {
   const poetInfo: poetInfo | undefined = data?.poetOrCat?.poet;
   return (
     <>
@@ -24,6 +19,7 @@ export default function PoetCard({
             width={120}
             height={120}
             alt={poetInfo?.name}
+            loading="lazy"
           />
 
           <h1>{poetInfo?.name}</h1>
@@ -99,8 +95,8 @@ function getCardInfos(poetInfo?: poetInfo) {
     "deathPlace",
     "deathYearInLHijri",
   ];
-  return commonProperties.map((property) => (
-    <div
+  return commonProperties.map((property, index) => (
+    <div key={index}
       className={`flex flex-col items-center text-center w-[25%] ${
         property === "deathYearInLHijri" ? "" : "border-l"
       } `}
