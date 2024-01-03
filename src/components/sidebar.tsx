@@ -186,9 +186,11 @@ export default function Sidebar() {
                 </Button>
                 <Button
                   onClick={() => {
-                    setPoetSearch("");
-                    dispatch(setCenturyFilter(century));
-                    dispatch(setPoetsFilter(poetSearch));
+                    if (century || poetSearch) {
+                      setPoetSearch("");
+                      dispatch(setCenturyFilter(century));
+                      dispatch(setPoetsFilter(poetSearch));
+                    }
                   }}
                   className="w-full"
                 >

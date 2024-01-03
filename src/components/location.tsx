@@ -10,7 +10,7 @@ export default function Location({ location }: { location: Array<location> }) {
       {location.map((obj) => (
         <Link href={obj.href} replace={true} className="flex items-center gap-2" key={obj.name}>
           {obj?.icon}
-          <p>{obj.name}</p>/
+          <p className="max-md:text-xs max-sm:text-[11px] whitespace-nowrap">{obj.name}</p>/
         </Link>
       ))}
     </div>
