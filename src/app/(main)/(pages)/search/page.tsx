@@ -18,7 +18,6 @@ export default function Search() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const term = searchParams.get("term") as string;
-
   const { data, fetchNextPage, isSuccess, isLoading, isError } =
     useInfiniteQuery({
       queryKey: ["search", term],
@@ -48,7 +47,7 @@ export default function Search() {
 
   const posts = data?.pages.flatMap((page) => page);
 
-  if (isSuccess) {
+  if (isSuccess && data?.pages[0].length) {
     const updatedPosts = posts
       ?.map((obj) => {
         const updatedHtmlText = obj.htmlText.replace(
@@ -75,7 +74,10 @@ export default function Search() {
               <h1 className="font-yekanBlack text-xl max-lg:text-base max-sm:text-sm">
                 {obj.fullTitle}
               </h1>
-              <div className="font-yekanLight" dangerouslySetInnerHTML={{ __html: obj.htmlText }} />
+              <div
+                className="font-yekanLight"
+                dangerouslySetInnerHTML={{ __html: obj.htmlText }}
+              />
               <div className="absolute inset-0 rounded-md translate-x-1 -translate-y-1 bg-gradient-to-br from-orange-800 via-orange-400 to-orange-800 -z-10 dark:opacity-80" />
             </div>
             <div className="w-[30%] max-md:hidden h-[270px] relative">
@@ -85,7 +87,8 @@ export default function Search() {
         ))}
       </div>
     );
+  } else {
+    router.push("/home?error=notFound");
+    return null;
   }
-
-  return null;
 }

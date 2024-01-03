@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import { location } from "@/lib/types";
 import { HomeIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { redirect } from "next/navigation";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const Location = dynamic(() => import('@/components/location'));
-const PoetCard = dynamic(() => import('@/components/PoetCard'));
+const Location = dynamic(() => import("@/components/location"));
+const PoetCard = dynamic(() => import("@/components/PoetCard"));
 
 async function getData(params: { poet: string; poem: Array<string> }) {
   try {
@@ -30,13 +30,12 @@ async function getData(params: { poet: string; poem: Array<string> }) {
       revalidate: 60 * 60,
     };
   } catch (error) {
-    redirect("/home?error=true");
+    redirect("/home?error=accessDenied");
   }
 }
 
 export default async function Poet({ params }: any) {
-  const {props} = await getData(params);
-
+  const { props } = await getData(params);
   const location: Array<location> = [
     {
       name: "خانه",
@@ -45,14 +44,14 @@ export default async function Poet({ params }: any) {
     },
     {
       name: props.data[1].title,
-      href: params.poet[0],
+      href: `/${params.poet[0]}`,
     },
   ];
 
   if (params.poet[1])
     location.push({
       name: props.data[0].title,
-      href: props.data[0].fullUrl,
+      href: `/${props.data[0].fullUrl}`,
     });
 
   return (

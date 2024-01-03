@@ -20,7 +20,7 @@ export default function App() {
         centeredSlides={true}
         loop={true}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -30,7 +30,22 @@ export default function App() {
         className="swiper-wrapper"
       >
         <SwiperSlide className="swiper-slide">
-          <img src="/images/ferdosi.png" alt="shahname picture" />
+          <img src="/images/BGs/2.jpg" alt="shahname picture" />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-slide">
+          <img src="/images/BGs/3.jpg" alt="shahname picture" />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-slide">
+          <img src="/images/BGs/4.jpg" alt="shahname picture" />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-slide">
+          <img src="/images/BGs/5.jpg" alt="shahname picture" />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-slide">
+          <img src="/images/BGs/6.jpg" alt="shahname picture" />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-slide">
+          <img src="/images/BGs/7.jpg" alt="shahname picture" />
         </SwiperSlide>
       </Swiper>
     </div>

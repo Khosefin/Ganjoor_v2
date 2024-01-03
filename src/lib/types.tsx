@@ -87,16 +87,10 @@ export interface userInfo {
 export interface sliceState {
   poetName: string | null;
   centuryNum: number | null;
-  userInfo: userInfo | null;
-  error: string | null;
-  loading: boolean | null;
-  isRemember: boolean | null;
-  status: "verified" | "rejected" | "error" | null;
-  captcha: string | null;
 }
 
 export interface location {
-  name :string,
-  icon?: any
-  href: string
+  name: string;
+  icon?: any;
+  href: string;
 }

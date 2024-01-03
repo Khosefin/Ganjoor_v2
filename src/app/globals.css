@@ -14,7 +14,8 @@ body {
 }
 
 .loginBg{
-  background-image: url(/images/ferdosi.png);
+  background-image: url(/images/BGs/4.jpg);
+  left: 0;
   background-size: cover;
 }
 

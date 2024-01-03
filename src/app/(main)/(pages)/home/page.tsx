@@ -43,7 +43,7 @@ export default function Home() {
 
   useEffect(() => {
     if (status === "error") {
-      toast.warning("مشکل در اتصال", {
+      toast.error("مشکل در اتصال", {
         description: "لطفا اینترنت خود را بررسی کنید",
         action: {
           label: "تلاش دوباره",
@@ -51,12 +51,20 @@ export default function Home() {
         },
       });
     }
-    if (!!errorP) {
+  }, [status]);
+
+  useEffect(() => {
+    if (errorP === "accessDenied") {
       toast.warning("دسترسی به صفحه ممکن نیست ", {
         description: "سایت درحال ساخت می باشد لطفا صبر کنید ...!",
       });
     }
-  }, [status]);
+    if (errorP === "notFound") {
+      toast.error("اطلاعات مورد نظر یافت نشد", {
+        description: "لطفا مقادیر دیگری را امتحان کنید ...",
+      });
+    }
+  }, [errorP]);
 
   const filteredPoets = data?.filter(
     (poet) =>
@@ -94,7 +102,7 @@ export default function Home() {
               {paginatedPoets?.map((poet: any, index: number) => (
                 <div
                   key={index}
-                  className="relative h-[280px]"
+                  className="relative h-[270px]"
                   ref={index === paginatedPoets.length - 1 ? ref : undefined}
                   onClick={() => setIsNavigating(true)}
                 >

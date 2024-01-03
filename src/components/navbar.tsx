@@ -2,6 +2,7 @@
 import { useTheme } from "next-themes";
 import Logo from "./logo";
 import {
+  ExitIcon,
   MagnifyingGlassIcon,
   MoonIcon,
   PersonIcon,
@@ -17,8 +18,13 @@ import {
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
-export default function Navbar() {
+interface NavbarProps {
+  user?: any;
+}
+
+export default function Navbar({ user }: NavbarProps) {
   const { setTheme, theme } = useTheme();
   const [search, setSearch] = useState<string>("");
   const router = useRouter();
@@ -40,7 +46,7 @@ export default function Navbar() {
 
   return (
     <div className="z-50 flex justify-between items-center mb-5 max-md:px-4 px-11 h-16 shadow-sm top-0 sticky w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
-      <Logo />
+      <Logo span />
       {/* lg view */}
       <div className="dark:border-0 border border-[#d9d9d9] dark:inputBg h-8 w-4/12 rounded-lg flex items-center max-md:hidden lg:-translate-x-10">
         <input
@@ -64,10 +70,50 @@ export default function Navbar() {
           <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
         </Button>
-        <Link href="/login">
-          <Button variant="secondary">ورود</Button>
-          <Button variant="default">نام نویسی</Button>
-        </Link>
+        {user ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="flex gap-2" size="icon">
+                <PersonIcon className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem>
+                <Link href="/home?error=accessDenied" className="w-full h-full">
+                  <Button
+                    variant="outline"
+                    className="w-32 border-primary text-primary"
+                  >
+                    پنل کاربری
+                  </Button>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Button
+                  variant="ghost"
+                  className="w-full h-full flex gap-2"
+                  onClick={() => {
+                    Cookies.remove("userToken");
+                    Cookies.remove("userInfo");
+                    Cookies.remove("userSessionId");
+                    router.refresh()
+                  }}
+                >
+                  خروج <ExitIcon />
+                </Button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <>
+            <Link href="/login">
+              <Button variant="secondary">ورود</Button>
+            </Link>
+            <Link href="/signup">
+              <Button variant="default">نام نویسی</Button>
+            </Link>
+          </>
+        )}
       </div>
       {/* end lg view */}
       {/* max-md veiw */}
@@ -103,17 +149,52 @@ export default function Navbar() {
               <PersonIcon className="h-[1.35rem] w-[1.35rem]" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>
-              <Link href="/login">
-                <Button className="w-full h-full">ورود</Button>
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href="/login">
-                <Button className="w-full h-full">نام نویسی</Button>
-              </Link>
-            </DropdownMenuItem>
+          <DropdownMenuContent align="center">
+            {user ? (
+              <>
+                <DropdownMenuItem>
+                  <Link
+                    href="/home?error=accessDenied"
+                    className="w-full h-full"
+                  >
+                    <Button
+                      className="flex gap-2 border-primary text-primary"
+                      variant="outline"
+                    >
+                      حساب کاربری
+                    </Button>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Button
+                    className="w-full h-full flex gap-2"
+                    variant="ghost"
+                    onClick={() => {
+                      Cookies.remove("userToken");
+                      Cookies.remove("userInfo");
+                      Cookies.remove("userSessionId");
+                      router.push("/");
+                    }}
+                  >
+                    خروج <ExitIcon />
+                  </Button>
+                </DropdownMenuItem>
+              </>
+            ) : (
+              <>
+                <DropdownMenuItem>
+                  <Link href="/login" className="w-full h-full">
+                    <Button className="w-full h-full">ورود</Button>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/login" className="w-full h-full">
+                    <Button className="w-full h-full">نام نویسی</Button>
+                  </Link>
+                </DropdownMenuItem>
+              </>
+            )}
+
             <DropdownMenuItem
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >

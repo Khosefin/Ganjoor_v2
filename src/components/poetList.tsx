@@ -1,5 +1,6 @@
 import { poetList } from "@/lib/types";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export default function PoetList({
   imageUrl,
@@ -19,13 +20,11 @@ export default function PoetList({
           } border drop-shadow-lg rounded-lg bg-background h-full mb-5 relative`}
         >
           <div className="flex flex-col gap-3 h-full justify-between">
-            <div className="flex flex-col text-center gap-3 items-center p-3 ">
-              <img
-                src={`https://api.ganjoor.net${imageUrl}`}
-                width={100}
-                height={100}
-                alt={name}
-              />
+            <div className="flex flex-col text-center gap-3 items-center p-3 pt-6 ">
+              <Avatar className="w-24 h-28">
+                <AvatarImage src={`https://api.ganjoor.net${imageUrl}`} />
+                <AvatarFallback>{name}</AvatarFallback>
+              </Avatar>
               <h1 className="font-yekanBold text-sm w-full h-1">{name}</h1>
             </div>
             <div className="flex justify-evenly py-4 border-t">

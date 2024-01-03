@@ -41,16 +41,17 @@
 
 .swiper-slide > img {
   width: 100%;
-  height: 200px;
+  height: 300px;
   object-fit: cover;
-  object-position: center;
-  max-width: none;
+  object-position: top;
+  max-width: 100%;
 }
 
 @media (max-width: 640px) {
   .swiper-slide > img {
     width: 100%;
-    height: 150px;
-    transform:scale(1.5);
+    height: 250px;
+    object-fit: cover;
+    /* transform:scale(3); */
   }
 }

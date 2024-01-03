@@ -11,16 +11,11 @@ import {
 import { useDispatch } from "react-redux";
 import { setCenturyFilter, setPoetsFilter } from "@/redux/slice";
 import { Drawer } from "./ui/drawer";
-import {
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerTrigger,
-} from "./ui/drawer";
+import { DrawerContent, DrawerFooter, DrawerTrigger } from "./ui/drawer";
 
 export default function Sidebar() {
   const [poets] = useState<string[]>(["متاسفانه هنوزی کتاب تعریف نشده :("]);
-  const [poetSearch, setPoetSearch] = useState<string>("");
+  const [poetSearch, setPoetSearch] = useState<string>();
   const [century, setCentury] = useState<number | null>(null);
   const dispatch = useDispatch();
 
@@ -43,7 +38,9 @@ export default function Sidebar() {
             <Button
               variant="link"
               size="icon"
-              onClick={() => dispatch(setPoetsFilter(poetSearch.trim()))}
+              onClick={() => {
+                if (poetSearch) dispatch(setPoetsFilter(poetSearch.trim()));
+              }}
             >
               <MagnifyingGlassIcon className="h-[1.6rem] w-[1.6rem]" />
             </Button>
@@ -73,7 +70,8 @@ export default function Sidebar() {
             <Slider
               min={3}
               max={14}
-              value={century ? [century] : [3]}
+              defaultValue={century ? [century] : [14]}
+              value={century ? [century] : [14]}
               onValueChange={(e) => setCentury(e[0])}
             />
             <div className="flex justify-between text-xs font-yekanThin ">
@@ -98,9 +96,11 @@ export default function Sidebar() {
           </Button>
           <Button
             onClick={() => {
-              setPoetSearch("");
-              dispatch(setCenturyFilter(century));
-              dispatch(setPoetsFilter(poetSearch));
+              if (century && poetSearch) {
+                setPoetSearch("");
+                dispatch(setCenturyFilter(century));
+                dispatch(setPoetsFilter(poetSearch));
+              }
             }}
             className="w-full"
           >
