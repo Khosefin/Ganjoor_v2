@@ -51,9 +51,6 @@ export default function Home() {
         },
       });
     }
-  }, [status]);
-
-  useEffect(() => {
     if (errorP === "accessDenied") {
       toast.warning("دسترسی به صفحه ممکن نیست ", {
         description: "سایت درحال ساخت می باشد لطفا صبر کنید ...!",
@@ -64,7 +61,7 @@ export default function Home() {
         description: "لطفا مقادیر دیگری را امتحان کنید ...",
       });
     }
-  }, [errorP]);
+  }, [status, errorP]);
 
   const filteredPoets = data?.filter(
     (poet) =>

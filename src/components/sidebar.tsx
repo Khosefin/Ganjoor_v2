@@ -96,7 +96,7 @@ export default function Sidebar() {
           </Button>
           <Button
             onClick={() => {
-              if (century && poetSearch) {
+              if (century || poetSearch) {
                 setPoetSearch("");
                 dispatch(setCenturyFilter(century));
                 dispatch(setPoetsFilter(poetSearch));
