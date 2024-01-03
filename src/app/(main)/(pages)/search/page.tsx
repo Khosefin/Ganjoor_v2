@@ -2,7 +2,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import PoetList from "@/components/PoetList";
+import PoetList from "@/components/poetList";
 import React, { useEffect, useRef } from "react";
 import { useIntersection } from "@mantine/hooks";
 import Loading from "@/components/loading";

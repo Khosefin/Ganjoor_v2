@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 
 const Location = dynamic(() => import("@/components/location"));
-const PoetCard = dynamic(() => import("@/components/PoetCard"));
+const PoetCard = dynamic(() => import("@/components/poetCard"));
 
 async function getData(params: { poet: string; poem: Array<string> }) {
   try {

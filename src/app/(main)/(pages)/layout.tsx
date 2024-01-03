@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar";
 import ImageSlider from "@/components/swiper/ImageSlider";
 import { cookies } from "next/headers";
 export default function HomeLayout({
