@@ -87,82 +87,93 @@ export default function Page() {
   }
 
   return (
-    <div>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-2"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel className="max-sm:text-xs">ایمیل :</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="dark:bg-[#3B3B3B]"
-                      placeholder="ایمیل خود را وارد کنید"
-                      type="text"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-          <FormField
-            control={form.control}
-            name="captchaValue"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel className="sr-only">کد امنیتی</FormLabel>
-                  <FormControl>
-                    <div className="flex gap-4">
+    <>
+      <div className="flex flex-col gap-3 text-center">
+        <h1 className="text-2xl font-yekanBold max-sm:text-xl"> ساخت حساب کاربری </h1>
+        <p className="text-sm text-muted-foreground max-sm:text-xs">
+          لطفا ایمیل و کد امنیتی را با دقت وارد کنید
+        </p>
+      </div>
+      <div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-2"
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel className="max-sm:text-xs">ایمیل :</FormLabel>
+                    <FormControl>
                       <Input
                         className="dark:bg-[#3B3B3B]"
-                        placeholder="کد امنیتی روبرو را وارد کنید"
-                        type="number"
+                        placeholder="ایمیل خود را وارد کنید"
+                        type="text"
                         {...field}
                       />
-                      {captchaData && (
-                        <img
-                          src={`https://api.ganjoor.net/api/rimages/${captchaData}.jpg`}
-                          alt="تصویر امنیتی"
-                          width={90}
-                          height={50}
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              control={form.control}
+              name="captchaValue"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel className="sr-only">کد امنیتی</FormLabel>
+                    <FormControl>
+                      <div className="flex gap-4">
+                        <Input
+                          className="dark:bg-[#3B3B3B]"
+                          placeholder="کد امنیتی روبرو را وارد کنید"
+                          type="number"
+                          {...field}
                         />
-                      )}
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-          <Button type="submit" className="w-full max-sm:text-xs my-2">
-            ارسال کد تایید
+                        {captchaData && (
+                          <img
+                            src={`https://api.ganjoor.net/api/rimages/${captchaData}.jpg`}
+                            alt="تصویر امنیتی"
+                            width={90}
+                            height={50}
+                          />
+                        )}
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <Button type="submit" className="w-full max-sm:text-xs my-2">
+              ارسال کد تایید
+            </Button>
+          </form>
+        </Form>
+        <div className="relative my-3">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs">
+            <span className=" px-2 text-muted-foreground">
+              اگر از قبل حساب دارید
+            </span>
+          </div>
+        </div>
+        <Link href="/login" replace>
+          <Button
+          variant="secondary"
+            className="bg-transparent text-primary border border-primary w-full max-sm:text-xs my-2"
+          >
+            ورود به حساب کاربری
           </Button>
-        </form>
-      </Form>
-      <div className="relative my-3">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs">
-          <span className=" px-2 text-muted-foreground">
-            اگر از قبل حساب دارید
-          </span>
-        </div>
+        </Link>
       </div>
-      <Link href="/login" replace>
-        <Button variant="link" className=" border border-primary w-full max-sm:text-xs my-2">
-          ورود به حساب کاربری
-        </Button>
-      </Link>
-    </div>
+    </>
   );
 }

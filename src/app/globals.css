@@ -167,7 +167,7 @@ table tr {
 }
 
 table td {
-  @apply border-l-[1px] px-2 divBg;
+  @apply border-l-[1px] py-1 px-2 divBg;
 }
 
 .related-images-frame {
@@ -196,7 +196,7 @@ table td {
 }
 
 .notice {
-  @apply rounded-xl py-4 px-6 mx-3 shadow-inner text-sm divBg border-t-2 border-primary  max-lg:mx-0 mb-3 text-justify max-sm:text-xs;
+  @apply rounded-xl py-4 px-6 shadow-inner text-sm divBg border-t-2 border-primary mb-3 text-justify max-sm:text-xs;
 }
 .notice > p,
 .notice > p > em {
@@ -230,7 +230,7 @@ h3:has(> #index) > a,
 }
 
 .main > p {
-  @apply text-justify items-center justify-center px-14 max-md:px-6 leading-8 max-sm:leading-6 max-md:leading-7 text-sm max-md:text-xs;
+  @apply text-justify items-center justify-center px-4 leading-8 max-sm:leading-6 max-md:leading-7 text-sm max-md:text-xs;
 }
 .main > a {
   @apply text-center items-center justify-center;

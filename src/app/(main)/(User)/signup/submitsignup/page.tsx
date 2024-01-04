@@ -81,123 +81,131 @@ export default function Page() {
     });
   }
   return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="secret"
-            render={({ field }) => (
-              <FormItem className="mb-2">
-                <FormLabel>کد تایید</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="کد تایید"
-                    className="dark:bg-[#3B3B3B]"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  کد ارسال شده به ایمیل را در اینجا وارد کنید
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="mb-2">
-            <Label>ایمیل</Label>
-            <Input
-              className="dark:bg-[#3B3B3B]"
-              value={email ? email : "مشکل در برقراری ارتباط"}
-              disabled
-            />
-          </div>
-          <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem className="mb-2">
-                <FormLabel>نام</FormLabel>
-                <FormControl>
-                  <Input
-                    className="dark:bg-[#3B3B3B]"
-                    placeholder="نام خود را وارد کنید"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="sureName"
-            render={({ field }) => (
-              <FormItem className="mb-2">
-                <FormLabel>نام خانوادگی</FormLabel>
-                <FormControl>
-                  <Input
-                    className="dark:bg-[#3B3B3B]"
-                    placeholder="نام خانوادگی خود را وارد کنید"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>رمزعبور</FormLabel>
-                <FormControl>
-                  <div className="flex gap-2 border rounded-md">
+    <>
+      <div className="flex flex-col gap-3 text-center">
+        <h1 className="text-2xl font-yekanBold max-sm:text-xl">
+          تکمیل ساخت حساب کاربری
+        </h1>
+      </div>
+
+      <div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="secret"
+              render={({ field }) => (
+                <FormItem className="mb-2">
+                  <FormLabel>کد تایید</FormLabel>
+                  <FormControl>
                     <Input
-                      placeholder="رمز عبور مورنظر خود را وارد کنید"
+                      placeholder="کد تایید"
+                      className="dark:bg-[#3B3B3B]"
                       {...field}
-                      type={isShowPassword ? "text" : "password"}
-                      className="w-full border-0 dark:bg-[#3B3B3B]"
                     />
-                    <Button
-                      size="icon"
-                      type="button"
-                      variant="link"
-                      className="border border-primary dark:bg-[#3B3B3B]"
-                      onClick={() => setIsShowPassword(!isShowPassword)}
-                    >
-                      {isShowPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
-                    </Button>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="sr-only">تایید رمز عبور</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="رمز عبور خود را تکرار کنید"
-                    type="password"
-                    {...field}
-                    className="dark:bg-[#3B3B3B]"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="mt-2 w-full">
-            تکمیل ثبت نام
-          </Button>
-        </form>
-      </Form>
-    </div>
+                  </FormControl>
+                  <FormDescription>
+                    کد ارسال شده به ایمیل را در اینجا وارد کنید
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="mb-2">
+              <Label>ایمیل</Label>
+              <Input
+                className="dark:bg-[#3B3B3B]"
+                value={email ? email : "مشکل در برقراری ارتباط"}
+                disabled
+              />
+            </div>
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem className="mb-2">
+                  <FormLabel>نام</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="dark:bg-[#3B3B3B]"
+                      placeholder="نام خود را وارد کنید"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="sureName"
+              render={({ field }) => (
+                <FormItem className="mb-2">
+                  <FormLabel>نام خانوادگی</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="dark:bg-[#3B3B3B]"
+                      placeholder="نام خانوادگی خود را وارد کنید"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>رمزعبور</FormLabel>
+                  <FormControl>
+                    <div className="flex gap-2 rounded-md">
+                      <Input
+                        placeholder="رمز عبور مورنظر خود را وارد کنید"
+                        {...field}
+                        type={isShowPassword ? "text" : "password"}
+                        className="w-full border-0 dark:bg-[#3B3B3B]"
+                      />
+                      <Button
+                        size="icon"
+                        type="button"
+                        variant="link"
+                        className="border border-primary dark:bg-[#3B3B3B]"
+                        onClick={() => setIsShowPassword(!isShowPassword)}
+                      >
+                        {isShowPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+                      </Button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="sr-only">تایید رمز عبور</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="رمز عبور خود را تکرار کنید"
+                      type="password"
+                      {...field}
+                      className="dark:bg-[#3B3B3B]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="mt-2 w-full">
+              تکمیل ثبت نام
+            </Button>
+          </form>
+        </Form>
+      </div>
+    </>
   );
 }

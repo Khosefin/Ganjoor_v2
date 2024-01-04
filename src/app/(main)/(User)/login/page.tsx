@@ -54,76 +54,87 @@ export default function Page() {
   }
 
   return (
-    <div>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-2"
-        >
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel className="max-sm:text-xs">نام کاربری</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="dark:bg-[#3B3B3B]"
-                      placeholder="نام کاربری خود را اینجا وارد کنید"
-                      type="text"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel className="max-sm:text-xs">رمز عبور</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="dark:bg-[#3B3B3B]"
-                      placeholder="رمز عبور خود را اینجا وارد کنید"
-                      type="text"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-
-          <Button type="submit" className="w-full my-3 max-sm:text-xs">
-            ورود
-          </Button>
-        </form>
-      </Form>
-      <div className="relative my-3">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs">
-          <span className=" px-2 text-muted-foreground">
-            اگر از قبل حساب ندارید
-          </span>
-        </div>
+    <>
+      <div className="flex flex-col gap-3 text-center">
+        <h1 className="text-2xl font-yekanBold max-sm:text-xl">
+          ورود به حساب کاربری
+        </h1>
+        <p className="text-sm text-muted-foreground max-sm:text-xs">
+          لطفا ایمیل و رمز عبور خود را با دقت وارد کنید
+        </p>
       </div>
-      <Link href="/signup" replace>
-        <Button
-          variant="link"
-          className=" border border-primary w-full my-3 max-sm:text-xs"
-        >
-          ساخت حساب کاربری
-        </Button>
-      </Link>
-    </div>
+      <div></div>
+      <div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-2"
+          >
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel className="max-sm:text-xs">نام کاربری</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="dark:bg-[#3B3B3B]"
+                        placeholder="نام کاربری خود را اینجا وارد کنید"
+                        type="text"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel className="max-sm:text-xs">رمز عبور</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="dark:bg-[#3B3B3B]"
+                        placeholder="رمز عبور خود را اینجا وارد کنید"
+                        type="text"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+
+            <Button type="submit" className="w-full my-3 max-sm:text-xs">
+              ورود
+            </Button>
+          </form>
+        </Form>
+        <div className="relative my-3">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs">
+            <span className=" px-2 text-muted-foreground">
+              اگر از قبل حساب ندارید
+            </span>
+          </div>
+        </div>
+        <Link href="/signup" replace>
+          <Button
+            variant="secondary"
+            className="bg-transparent text-primary border border-primary w-full max-sm:text-xs my-2"
+          >
+            ساخت حساب کاربری
+          </Button>
+        </Link>
+      </div>
+    </>
   );
 }

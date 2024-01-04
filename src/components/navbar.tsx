@@ -45,7 +45,8 @@ export default function Navbar({ user }: NavbarProps) {
   };
 
   return (
-    <div className="z-50 flex justify-between items-center mb-5 max-md:px-4 px-11 h-16 shadow-sm top-0 sticky w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <div className="z-50 mb-5 max-md:px-2 h-16 shadow-sm top-0 sticky w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 flex justify-center">
+    <div className="w-[93.5%] max-md:w-[98%] h-full flex justify-between items-center">
       <Logo span />
       {/* lg view */}
       <div className="dark:border-0 border border-[#d9d9d9] dark:inputBg h-8 w-4/12 rounded-lg flex items-center max-md:hidden lg:-translate-x-10">
@@ -206,6 +207,7 @@ export default function Navbar({ user }: NavbarProps) {
         </DropdownMenu>
       </div>
       {/* end max-md veiw */}
+    </div>
     </div>
   );
 }
