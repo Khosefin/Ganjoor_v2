@@ -21,7 +21,7 @@ export default function RootLayout({
     <>
       <div className="h-dvh w-full flex items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 fixed loginBg">
         <div className="lg:p-2">
-          <div className="mx-auto flex w-[370px] h-full flex-col justify-center gap-4 sm:w-[420px] bg-background backdrop-blur rounded-xl p-7">
+          <div className="mx-auto flex w-[370px] h-full flex-col justify-center gap-4 sm:w-[420px] rounded-xl p-7 border-border/40 bg-background/95 backdrop-blur-[10px] supports-[backdrop-filter]:bg-background/75 max-md:shadow-white/20 max-md:shadow-inner">
             {children}
             <Link href="/home" className="translate-y-10 -translate-x-32 -my-6">
               <Button
