@@ -21,7 +21,7 @@ export default function RootLayout({
         <div className="background w-full inset-0 fixed -z-10 opacity-70 blur-[1px] dark:opacity-50 h-[150%]" />
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

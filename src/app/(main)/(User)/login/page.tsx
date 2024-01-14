@@ -41,7 +41,6 @@ export default function Page() {
       clientAppName: "Khosefin:)",
       language: "farsi",
     };
-    console.log(Formdata);
     LoginAction(Formdata).then((data: any) => {
       if (data.result === "Success") {
         toast.success("ورود با موفقیت انجام گرفت");

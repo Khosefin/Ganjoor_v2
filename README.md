@@ -1,6 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a Implementation of the Ganjoor poetry website using a custom API and the JS Next framework, along with Typescript, TailwindCss, and Shadcn for full responsiveness. The site features a comprehensive search functionality across all poems, displaying and categorizing all Iranian poets. Each poet has a dedicated page with the ability to play their poems, showcase their works, and display poetic meters.
 
-## Getting Started
+Additionally, the website includes a login and registration page for user access. The performance has been optimized to achieve up to 80% Lighthouse score, with features such as lazy loading, server-side rendering (SSR), and client-side rendering (CSR). The site also supports both light and dark mode themes.
+
+## Site Preview
+
+![site Desktop preview :](./desktopPreV.jpg)
+![site Mobile preview :](./mobilePreV.jpg)
+
+## Website Address
+
+[ganjoor.liara.run](https://ganjoor.liara.run/)
+
+## OR Getting Started
 
 First, run the development server:
 

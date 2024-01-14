@@ -36,7 +36,6 @@ async function getData() {
     );
     return response.data;
   } catch (error) {
-    console.error("Error fetching captcha:", error);
     throw error;
   }
 }
@@ -50,7 +49,9 @@ export default function Page() {
     try {
       const captcha = await getData();
       setCaptchaData(captcha);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("اینترنت خود را بررسی کنید");
+    }
   };
   useEffect(() => {
     fetchData();

@@ -112,7 +112,7 @@ export default function Sidebar() {
       <div className="md:hidden ">
         <Drawer>
           <DrawerTrigger className="flex w-full items-center px-5 py-2 rounded-lg justify-between bg-background border">
-            <p>محدود سازی</p>
+            <p className="max-md:text-sm">محدود سازی</p>
             <MixerHorizontalIcon className="h-[1.2rem] w-[1.2rem]" />
           </DrawerTrigger>
           <DrawerContent>
